@@ -8,6 +8,8 @@ The data channel metafile might be formatted like so:
 
 ...and could also have headers for categories. Units would be used for display, but not really for calculations.
 
+We could potentially utilize them for calculations by building a map of conversion ratios, and then allowing calculations to implicitly use that.
+
 Example file:
 
     Electrical System
