@@ -4,13 +4,72 @@
     <title>
       Telemetry Visualizer
     </title>
+    <!-- Load bootstrap, optional theme, and js from maxcdn for now -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css" />
+    <!-- Leaving this here for now in case we need it
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js">
+      </script>
+    -->
+
+    <!-- Load our own styling -->
+    <link rel="stylesheet" href="css/grid.css" />
   </head>
   <body>
-    <h1>
-      Telemetry Visualizer
-    </h1>
-    <p>
-      Placeholder text... Lorem ipsum etc.
-    </p>
+    <div class="container"> <!-- container-fluid may be better later, since we may want to use all available space -->
+      <h1>
+        Telemetry Visualizer
+      </h1>
+      <div class="row">
+        <div class="col-md-6" id="col-2d">
+          <div class="row">
+            <div class="graph-container col-md-4">
+              <div class="graph-plot">
+                Test0
+              </div>
+            </div>
+            <div class="graph-container col-md-4">
+              <div class="graph-plot">
+                Test1
+              </div>
+            </div>
+            <div class="graph-container col-md-4">
+              <div class="graph-plot">
+                Test2
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="graph-container col-md-6">
+              <div class="graph-plot">
+                Test3
+              </div>
+            </div>
+            <div class="graph-container col-md-6">
+              <div class="graph-plot">
+                Test4
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="graph-container col-md-8">
+              <div class="graph-plot">
+                Test5
+              </div>
+            </div>
+            <div class="graph-container col-md-4">
+              <div class="graph-plot">
+                Test6
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="graph-container col-md-6" id="col-3d">
+          <div class="graph-plot">
+            Example of a larger 3D Area, including some opengl representation of the craft, perhaps. This may actually not be the division we want, and it may be allowed to be a smaller sub-plot, but this demonstrates the ability to have a split view.
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

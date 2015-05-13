@@ -1,0 +1,7 @@
+.graph-container {
+  outline: solid 1px #000;
+}
+
+.graph-plot {
+  outline: solid 1px #F00;
+}
