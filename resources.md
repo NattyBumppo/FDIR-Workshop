@@ -18,3 +18,5 @@ This document contains some helpful resources for learning the theory behind FDI
 - [Post-flight report from Kerbal Space Program, showing anomalies/accidents](http://i.imgur.com/oOtd6Fq.jpg)
 - [Telemachus](http://forum.kerbalspaceprogram.com/threads/24594-0-25-(2014-10-12)-Telemachus-%E2%80%93-Telemetry-and-Flight-Control-in-the-Web-Browser), an in-the-browser-telemetry plugin for Kerbal Space Program. The screenshots show a relatively normal, information-light layout, but the design is very clean and looks so much more modern than any of the telemetry programs actually in use...
 - [Telemachus Github repo](https://github.com/richardbunt/Telemachus), with some interesting plotting code that we might be able to repurpose, giving credit of course
+- [Extrahop Screen 1](https://tctechcrunch2011.files.wordpress.com/2014/05/web-0.png?w=1024&h=545)
+- [Extrahop Screen 2](https://tctechcrunch2011.files.wordpress.com/2014/05/web-0.png?w=1024&h=545)
