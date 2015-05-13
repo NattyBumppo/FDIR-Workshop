@@ -47,6 +47,8 @@ To show an example, the following would mean "Trigger a 'High motor voltage' fau
     Value, Right motor voltage, >, 10, High motor voltage
     Average, X acceleration, Y acceleration, Z acceleration, >, 5, Overacceleration
 
+**It would also be nice to support multiple conditions for a certain fault to occur (AND operator)**
+
 These files can be read by our artificial data simulation script to generate values (and maybe even generate faults), and can also be read by our GUI to detect and properly display faults and channel relationships.
 
 # Ideas for screen layout
