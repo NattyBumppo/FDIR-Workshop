@@ -17,3 +17,4 @@ This document contains some helpful resources for learning the theory behind FDI
 - [Seismograph telemetry... a minimal way to monitor multiple channels at once](https://seismo.berkeley.edu/annual_report/ar01_02/img63.gif)
 - [Post-flight report from Kerbal Space Program, showing anomalies/accidents](http://i.imgur.com/oOtd6Fq.jpg)
 - [Telemachus](http://forum.kerbalspaceprogram.com/threads/24594-0-25-(2014-10-12)-Telemachus-%E2%80%93-Telemetry-and-Flight-Control-in-the-Web-Browser), an in-the-browser-telemetry plugin for Kerbal Space Program. The screenshots show a relatively normal, information-light layout, but the design is very clean and looks so much more modern than any of the telemetry programs actually in use...
+- [Telemachus Github repo](https://github.com/richardbunt/Telemachus), with some interesting plotting code that we might be able to repurpose, giving credit of course
