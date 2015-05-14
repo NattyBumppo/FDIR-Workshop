@@ -3,7 +3,7 @@ This document contains some helpful resources for learning the theory behind FDI
 # Info Links
 
 - [A Guide to Fault Detection and Diagnosis](http://www.gregstanleyandassociates.com/whitepapers/FaultDiagnosis/faultdiagnosis.htm) (the "Overview and Basic Terminology" section is particularly relevant, along with some of the links below)
-- [Event-Oriented Fault Detection/Diagnosis and Correlation](Event Oriented Fault Detection, Diagnosis, and Correlation)
+- [Event-Oriented Fault Detection/Diagnosis and Correlation](http://www.gregstanleyandassociates.com/whitepapers/FaultDiagnosis/Event-Oriented/event-oriented.htm)
 - [Model-based Reasoning](http://www.gregstanleyandassociates.com/whitepapers/FaultDiagnosis/Model-Based-Reasoning/model-based-reasoning.htm)
 - [Fault Management](http://www.gregstanleyandassociates.com/whitepapers/FaultDiagnosis/Fault-Management/fault-management.htm)
 - [Fault Signatures](http://www.gregstanleyandassociates.com/whitepapers/FaultDiagnosis/Fault-Signatures/fault-signatures.htm)
