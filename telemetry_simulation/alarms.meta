@@ -1,0 +1,3 @@
+Value, Left motor voltage, >, 10, High motor voltage
+Value, Right motor voltage, >, 10, High motor voltage
+Average, X acceleration, Y acceleration, Z acceleration, >, 5, Overacceleration

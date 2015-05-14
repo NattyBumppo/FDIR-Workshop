@@ -1,0 +1,22 @@
+Electrical System
+* Left Motor
+** Left motor current draw, float, A, 5.0, 1.0
+* Left motor voltage, float, V, 7.0, 0.5
+* Right Motor
+** Right motor current draw, float, A, 5.0, 1.0
+* Right motor voltage, float, V, 7.0, 0.5
+Main CPU
+* Cores in use, int, -, 4, 0.4
+* Total CPU usage %, float, %, 50, 5
+* Total used RAM, float, MB, 500, 10
+* Current FSM state, string, -, -, -
+* Internal health metric, float, -, 80, 8
+Inertial Sensors
+* Gyroscope
+** Gyroscope x-rotation, float, degrees, 0, 0.3
+** Gyroscope y-rotation, float, degrees, 0, 0.3
+** Gyroscope z-rotation, float, degrees, 0, 0.3
+* Accelerometer
+** X acceleration, float, g, 0, 0.2
+** Y acceleration, float, g, 0, 0.2
+** Z acceleration, float, g, 0, 0.2

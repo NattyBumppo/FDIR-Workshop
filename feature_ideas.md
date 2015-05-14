@@ -4,38 +4,36 @@ Two types of metafiles: one to hold information about data channels, their prope
 
 The data channel metafile might be formatted like so:
 
-    HierarchySymbol(s) Name, Datatype, Units
+    HierarchySymbol(s) Name, Datatype, Units, Mean, StdDev
 
-...and could also have headers for categories. Units would be used for display, but not really for calculations.
+...and could also have headers for categories. Units would be used for display, but not really for calculations. Mean and standard deviation are for simulation purposes, and can be left as '-' if simulation is not occurring.
 
 We could potentially utilize them for calculations by building a map of conversion ratios, and then allowing calculations to implicitly use that.
 
 Example file:
 
     Electrical System
-    - Left motor voltage, float, V
-    - Right motor voltage, float, V
-    - Left Motor
-    -- Left motor current draw, float, A
-    -- Left motor voltage, float, V
-    - Right Motor
-    -- Right motor current draw, float, A
-    -- Right motor voltage, float, V
+    * Left Motor
+    ** Left motor current draw, float, A, 5.0, 1.0
+    * Left motor voltage, float, V, 7.0, 0.5
+    * Right Motor
+    ** Right motor current draw, float, A, 5.0, 1.0
+    * Right motor voltage, float, V, 7.0, 0.5
     Main CPU
-    - Cores in use, int, -
-    - Total CPU usage %, float, %
-    - Total used RAM, float, MB
-    - Current FSM state, string, -
-    - Internal health metric, float, -
+    * Cores in use, int, -, 4, 0.4
+    * Total CPU usage %, float, %, 50, 5
+    * Total used RAM, float, MB, 500, 10
+    * Current FSM state, string, -, -, -
+    * Internal health metric, float, -, 80, 8
     Inertial Sensors
-    - Gyroscope
-    -- Gyroscope x-rotation, float, degrees
-    -- Gyroscope y-rotation, float, degrees
-    -- Gyroscope z-rotation, float, degrees
-    - Accelerometer
-    -- X acceleration, float, g
-    -- Y acceleration, float, g
-    -- Z acceleration, float, g
+    * Gyroscope
+    ** Gyroscope x-rotation, float, degrees, 0, 0.3
+    ** Gyroscope y-rotation, float, degrees, 0, 0.3
+    ** Gyroscope z-rotation, float, degrees, 0, 0.3
+    * Accelerometer
+    ** X acceleration, float, g, 0, 0.2
+    ** Y acceleration, float, g, 0, 0.2
+    ** Z acceleration, float, g, 0, 0.2
 
 The file for defining fault conditions could depict basic mathematical rules for residual calculations, formatted something like this:
 
@@ -55,10 +53,10 @@ These files can be read by our artificial data simulation script to generate val
 
 # Ideas for screen layout
 
-- 2D plots on Unity GUI panels
-- Split-screen with 2D on one side and 3D on another, or perhaps picture-in-picture view, or perhaps just panels overlaid on 3D (we'll have to figure out what looks best)
-- Navigation of channels might be best implemented as a degree-of-interest tree
+* 2D plots on Unity GUI panels
+* Split-screen with 2D on one side and 3D on another, or perhaps picture-in-picture view, or perhaps just panels overlaid on 3D (we'll have to figure out what looks best)
+* Navigation of channels might be best implemented as a degree-of-interest tree
 
 # 3D Usage ideas
 
-- Certain special channels might have hooks in the GUI to affect 3D object positioning/orientation or creation/deletion, such as accelerometer data being used to rotate a piece of geometry or depth camera data being used to update knowledge of obstacles in the world. We can hard-code these relationships (for now anyway).
+* Certain special channels might have hooks in the GUI to affect 3D object positioning/orientation or creation/deletion, such as accelerometer data being used to rotate a piece of geometry or depth camera data being used to update knowledge of obstacles in the world. We can hard-code these relationships (for now anyway).
