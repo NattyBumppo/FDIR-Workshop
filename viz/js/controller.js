@@ -8,6 +8,8 @@
   function initAll() {
     var graph_2d_area = $('#col-2d');
     addGraph(graph_2d_area, 'test_graph', 12);
+
+    setInterval(graph_drawer.updateGraphs, 5000);
   }
 
   function addGraph(area, id, span) {
@@ -23,7 +25,7 @@
 
     area.append(container);
 
-    graph_drawer.createGraph(id, 'blank_for_now');
+    graph_drawer.createLineGraph(id, 'blank_for_now');
   }
 
 }(window.controller = window.controller || {}, jQuery));
