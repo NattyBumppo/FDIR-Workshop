@@ -1,0 +1,23 @@
+<html>
+<body>
+
+<script type="text/javascript">
+
+    var ws = new WebSocket("ws://localhost:3333/");
+    ws.onopen = function() {
+    };
+    ws.onmessage = function (e) { data_received(e.data) };
+    ws.onclose = function() { };
+
+
+  function data_received(data)
+  {
+    document.getElementById("data").innerHTML = data;
+  }
+
+</script>
+<div><h2>Latest Data:</h2>
+  <div id='data'></div>
+</div>
+</body>
+</html>
