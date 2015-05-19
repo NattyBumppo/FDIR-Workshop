@@ -19,7 +19,6 @@
     var chart = c3.generate(
       {
         bindto: div[0],
-        x: 'x',
         data: data_store.getData(channel)// This will probably change in format
       }
     );

@@ -3,22 +3,19 @@
   var temp_index = 0;
   var data = {
     sample_1: [
-      ['data1', 30, 200, 100, 400, 150, 250],
-      ['data1', 300, 20, 150, 40, 15, 200],
+      ['x', 5, 10, 15, 20, 25, 30],
       ['data1', 50, 80, 100, 200, 50, 100]
     ],
     sample_2: [
+      ['x', 5, 10, 15, 20, 25, 30],
       ['data2', 35, 220, 10, 45, 170, 25],
-      ['data2', 130, 200, 180, 30, 120, 20],
-      ['data2', 20, 60, 170, 100, 40, 60]
     ],
   }
 
   data_store.getData = function(channel) {
     return {
-      columns: [
-        data[channel][(temp_index++) % data[channel].length]
-      ]
+      x: 'x',
+      columns: data[channel]
     };
   }
 
