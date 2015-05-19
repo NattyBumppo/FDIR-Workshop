@@ -1,17 +1,24 @@
 (function(graph, $, c3, undefined) {
   // This will later be used when graphs change
   var graphs = [];
+  var graph_area;
+
+  graph.setup = function(container_id) {
+    graph_area = $(container_id);
+  }
 
   // This function creates a graph to be added to the document
-  // container_id: id of element to add this to
   // channel: This is the channel to get data from
-  // This may change in wrapper-ness
   //
-  // We could set individual update loops here
-  graph.createLineGraph = function(container_id, channel) {
+  graph.addGraph = function(channel) {
+    var div = $(document.createElement('div'));
+    div.addClass('detail_chart');
+
+    graph_area.append(div);
+
     var chart = c3.generate(
       {
-        bindto: '#' + container_id,
+        bindto: div[0],
         x: 'x',
         data: data_store.getData(channel)// This will probably change in format
       }

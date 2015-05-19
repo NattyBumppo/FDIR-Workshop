@@ -6,26 +6,10 @@
   $(document).ready(initAll);
 
   function initAll() {
-    var graph_2d_area = $('#col-2d');
-    addGraph(graph_2d_area, 'test_graph', 12);
-
+    graph_drawer.setup('#col-2d');
+    graph_drawer.addGraph('sample_1');
+    graph_drawer.addGraph('sample_2');
     setInterval(graph_drawer.updateGraphs, 5000);
-  }
-
-  function addGraph(area, id, span) {
-    var container = $(document.createElement('div'));
-
-    container.attr('id', id);
-    container.addClass('col-md-' + span);
-    container.css(
-      {
-        height: '400px'
-      }
-    );
-
-    area.append(container);
-
-    graph_drawer.createLineGraph(id, 'blank_for_now');
   }
 
 }(window.controller = window.controller || {}, jQuery));
