@@ -20,14 +20,14 @@
 
   // Callback function that handles displaying the results
   function display_cb(results) {
-    for(var i=0;i<results.length;i++) {
+    for(var i=0;i<results.entries.length;i++) {
       if(i % num_cols == 0) {
         correlation_area.append(
           $(document.createElement('div')).addClass('row')
         );
       }
 
-      correlation_area.children().last().append(createCorrelationTile(results[i]));
+      correlation_area.children().last().append(createCorrelationTile(results.entries[i]));
     }
   }
 
