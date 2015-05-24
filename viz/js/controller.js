@@ -6,10 +6,23 @@
   $(document).ready(initAll);
 
   function initAll() {
-    graph_drawer.setup('#col-2d');
+    setupGraphs();
+    setupCorrelationVector();
+  }
+
+  function setupGraphs() {
+    graph_drawer.bind('#detail_graphs');
+
     graph_drawer.addGraph('sample_1');
     graph_drawer.addGraph('sample_2');
-    setInterval(graph_drawer.updateGraphs, 5000);
+
+    setInterval(graph_drawer.updateGraphs, 5000);// Probably will move this into graph_drawer
+  }
+
+  function setupCorrelationVector() {
+    correlation.bind('#correlation_vector');
+
+    correlation.display('sample_correlation');
   }
 
 }(window.controller = window.controller || {}, jQuery));

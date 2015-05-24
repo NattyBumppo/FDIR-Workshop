@@ -3,8 +3,8 @@
   var graphs = [];
   var graph_area;
 
-  graph.setup = function(container_id) {
-    graph_area = $(container_id);
+  graph.bind = function(selector) {
+    graph_area = $(selector);
   }
 
   // This function creates a graph to be added to the document
