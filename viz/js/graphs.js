@@ -31,10 +31,10 @@
     );
   }
 
-  graph.updateGraphs = function() {
+  graph.updateGraphs = function(time) {
     for(var i=0;i<graphs.length;i++) {
       graphs[i].chart.load(
-          data_store.getData(graphs[i].channel)
+          data_store.getData(graphs[i].channel, time)
       );
     }
   }

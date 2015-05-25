@@ -7,22 +7,37 @@
 (function(data_store, $, undefined) {
   var temp_index = 0;
   var detail_data = {
-    sample_1: [
-      ['x', 5, 10, 15, 20, 25, 30],
-      ['data1', 50, 80, 100, 200, 50, 100]
-    ],
-    sample_2: [
-      ['x', 5, 10, 15, 20, 25, 30],
-      ['data2', 35, 220, 10, 45, 170, 25],
-    ],
+    sample_1: {
+      name: 'data1',
+      timings: [0, 5, 10, 15, 20, 25],
+      values: [50, 80, 100, 200, 50, 100]
+    },
+    sample_2: {
+      name: 'data2',
+      timings: [0, 5, 10, 15, 20, 25],
+      values: [35, 220, 10, 45, 170, 25],
+    }
   };
 
   var correlation_data = {};
 
   data_store.getData = function(channel) {
+    var cols = [];
+    cols.push(
+      ['x'].concat(
+        detail_data[channel].timings
+      )
+    );
+
+    cols.push(
+      [detail_data[channel].name].concat(
+        detail_data[channel].values
+      )
+    );
+
     return {
       x: 'x',
-      columns: detail_data[channel]
+      columns: cols
     };
   }
 

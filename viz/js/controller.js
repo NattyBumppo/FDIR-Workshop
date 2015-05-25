@@ -8,6 +8,8 @@
   function initAll() {
     setupGraphs();
     setupCorrelationVector();
+
+    timer.start(1000);
   }
 
   function setupGraphs() {
@@ -16,7 +18,7 @@
     graph_drawer.addGraph('sample_1');
     graph_drawer.addGraph('sample_2');
 
-    setInterval(graph_drawer.updateGraphs, 5000);// Probably will move this into graph_drawer
+    timer.registerUpdater(graph_drawer.updateGraphs);// Probably will move this into graph_drawer
   }
 
   function setupCorrelationVector() {
