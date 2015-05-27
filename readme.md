@@ -4,6 +4,14 @@ This is a networked JavaScript application (and accompanying Arduino application
 
 # Development Notes
 
+## Setup
+
+The server is [flask](http://flask.pocoo.org/), which can be installed minimally using:
+
+    pip install flask
+
+## Running
+
 To run the visualization server/client combo:
 
     cd viz
