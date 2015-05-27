@@ -19,23 +19,46 @@
     var chart = c3.generate(
       {
         bindto: div[0],
-        data: data_store.getData(channel)// This will probably change in format
+        data: {
+          x: 'x',
+          columns: []
+        },
+        axis: {
+          x: {
+            tick: {
+              format: function(x) { return (x / 1000.0).toFixed(2); }
+            }
+          }
+        }
       }
     );
 
     graphs.push(
       {
         chart: chart,
-        channel: channel
+        channel: channel,
+        last_loaded: timer.getTime() - 1// Sometime in the 'past' to force update
       }
     );
   }
 
   graph.updateGraphs = function(time) {
     for(var i=0;i<graphs.length;i++) {
-      graphs[i].chart.load(
-          data_store.getData(graphs[i].channel, time)
-      );
+      updateGraph(graphs[i], time);
+    }
+  }
+
+  function updateGraph(info, time) {
+    data_store.getData(
+      info.channel,
+      time,
+      generateDataCallback(info.chart)
+    );
+  }
+
+  function generateDataCallback(chart) {
+    return function(data) {
+      chart.load(data);
     }
   }
 
