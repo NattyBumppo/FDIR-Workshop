@@ -41,7 +41,7 @@
       end: 'end_date'
     };
 
-    $.get('/data/correlation_temp.json', range, makeCorrelatedHandler(display_cb), 'json');
+    $.get('/static/data/correlation_temp.json', range, makeCorrelatedHandler(display_cb), 'json');
   }
 
   // Helper function to get the data at and prior to the
