@@ -61,6 +61,12 @@ def fetch_data(channel):
     # Adjust the time_start, so the client can know the offset if it wants
     info['time_start'] += start_index * info['time_span']
 
+    # Add the display name as the channel name if not set
+    if 'display_name' not in info:
+        info['display_name'] = channel
+
+    info['status'] = 'SUCCESS'
+
     return json.dumps(info)
 
 def is_valid_channel(channel):

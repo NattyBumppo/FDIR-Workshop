@@ -5,30 +5,20 @@
 
 // We may not need jQuery here
 (function(data_store, $, undefined) {
-  var temp_index = 0;
-  var detail_data = {
-    sample_1: {
-      name: 'data1',
-      time_start: 0,
-      time_span: 1000,
-      values: [50, 80, 100, 200, 50, 100]
-    },
-    sample_2: {
-      name: 'data2',
-      time_start: 0,
-      time_span: 1000,
-      values: [35, 220, 10, 45, 170, 25],
-    }
-  };
+  var detail_data = {};
 
   var correlation_data = {};
   var display_size = 6;
+
+  data_store.temp = function() {
+    return detail_data;
+  }
 
   data_store.getData = function(channel, time, display_cb) {
     // Check if there is any data for this
     if(detail_data[channel] == undefined) {
       // No data, thus need to fetch
-      fetchData(channel, {include_time: time}, time);
+      fetchData(channel, {include_time: time}, time, display_cb);
     } else {
       // We have some, but need to check if we have it for this time
 
@@ -45,8 +35,9 @@
           exclude_start: 'True'
         };
 
-        fetch_data(channel, params, time);
+        fetchData(channel, params, time, display_cb);
       }
+    }
   }
 
   data_store.getCorrelated = function(channel, display_cb) {
@@ -64,11 +55,11 @@
     return (info.values.length * info.time_span) + info.time_start;
   }
 
-  function fetchData(channel, params, time) {
-    $.get('/data/' + channel, params, makeDetailDataHandler(channel, time), 'json');
+  function fetchData(channel, params, time, display_cb) {
+    $.get('/data/' + channel, params, makeDetailDataHandler(channel, time, display_cb), 'json');
   }
 
-  function makeDetailDataHandler(channel, time) {
+  function makeDetailDataHandler(channel, time, display_cb) {
     return function(data) {
       if(data.status == 'ERROR') {
         return false;
@@ -77,24 +68,37 @@
       if(detail_data[channel] == undefined) {
         // Need to add all the data
         detail_data[channel] = data;
+        detail_data[channel].last_updated = time;
       } else {
         // Just need to append, if this is the newest known request
         if(time > detail_data[channel].last_updated) {
           // Need to add on the values
-          detail_data[channel].values.concat(data.values);
+          detail_data[channel].values = detail_data[channel].values.concat(data.values);
 
           // We shouldn't need to worry about race conditions here
           // I believe, because eventing of same origin stuff should
           // be single thread. I'm not certain how this applies to
           // AJAX, but will look further to make certain we're good.
-          detail_data[channel].last_modified = time;
+          detail_data[channel].last_updated = time;
         } else {
-          return false; // Ignore becasue a newer request already arrived
+          return false; // Ignore because a newer and superseding request already arrived
         }
       }
 
       // Now we need to fire the callback
-    }
+      // This could potentially be refactored with the original method
+      // but putting it here for now. It does have a difference to
+      // handle the case where there is no data for the current time
+      var index = Math.min(
+        indexOfTime(detail_data[channel], time),
+        detail_data[channel].values.length - 1
+      );
+
+      if(isDisplayableIndex(detail_data[channel], index)) {
+        // Then we have the data
+        display_cb(getDetailData(detail_data[channel], index));
+      } // Else there is no data for the channel
+    };
   }
 
   // Helper function to get the data at and prior to the
@@ -117,7 +121,7 @@
     );
 
     // Prepend column names
-    cols[0].unshift(info.name);
+    cols[0].unshift(info.display_name);
     cols[1].unshift('x');
 
     return {
@@ -136,7 +140,7 @@
   // Maybe not necessary, now that we don't check for
   // a complete span...
   function isDisplayableIndex(info, index) {
-    return index >= -1 && index < info.values.length;
+    return index > -1 && index < info.values.length;
   }
 
   // This function could easily be made general, or
