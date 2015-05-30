@@ -25,14 +25,28 @@
   var display_size = 6;
 
   data_store.getData = function(channel, time, display_cb) {
-    // If it exists already, just call the callback
-    var index = indexOfTime(detail_data[channel], time);
-    if(isDisplayableIndex(detail_data[channel], index)) {
-      // Then we have the data
-      display_cb(getDetailData(detail_data[channel], index));
+    // Check if there is any data for this
+    if(detail_data[channel] == undefined) {
+      // No data, thus need to fetch
+      fetchData(channel, {include_time: time}, time);
     } else {
-      // Fetch data
-    }
+      // We have some, but need to check if we have it for this time
+
+      // If it exists already, just call the callback
+      var index = indexOfTime(detail_data[channel], time);
+      if(isDisplayableIndex(detail_data[channel], index)) {
+        // Then we have the data
+        display_cb(getDetailData(detail_data[channel], index));
+      } else {
+        // Fetch data
+        var params = {
+          include_time: time,
+          start_time: getLastDataTime(channel),
+          exclude_start: 'True'
+        };
+
+        fetch_data(channel, params, time);
+      }
   }
 
   data_store.getCorrelated = function(channel, display_cb) {
@@ -42,6 +56,45 @@
     };
 
     $.get('/static/data/correlation_temp.json', range, makeCorrelatedHandler(display_cb), 'json');
+  }
+
+  function getLastDataTime(channel) {
+    var info = detail_data[channel];
+
+    return (info.values.length * info.time_span) + info.time_start;
+  }
+
+  function fetchData(channel, params, time) {
+    $.get('/data/' + channel, params, makeDetailDataHandler(channel, time), 'json');
+  }
+
+  function makeDetailDataHandler(channel, time) {
+    return function(data) {
+      if(data.status == 'ERROR') {
+        return false;
+      }
+
+      if(detail_data[channel] == undefined) {
+        // Need to add all the data
+        detail_data[channel] = data;
+      } else {
+        // Just need to append, if this is the newest known request
+        if(time > detail_data[channel].last_updated) {
+          // Need to add on the values
+          detail_data[channel].values.concat(data.values);
+
+          // We shouldn't need to worry about race conditions here
+          // I believe, because eventing of same origin stuff should
+          // be single thread. I'm not certain how this applies to
+          // AJAX, but will look further to make certain we're good.
+          detail_data[channel].last_modified = time;
+        } else {
+          return false; // Ignore becasue a newer request already arrived
+        }
+      }
+
+      // Now we need to fire the callback
+    }
   }
 
   // Helper function to get the data at and prior to the
