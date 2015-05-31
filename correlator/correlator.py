@@ -68,7 +68,7 @@ def demo():
     print 'Finding correlation between every pair of channels:'
     for a, b in it.combinations(channel_samples.keys(), 2):
         print 'Correlation between %s and %s:\n %s' % (a, b, get_pcc(channel_samples[a], channel_samples[b]))
-    
+
     print 'Finding full correlation matrix of all channels:'
     print get_correlation_matrix(channel_samples.values())
 
