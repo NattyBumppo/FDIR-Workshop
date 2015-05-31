@@ -35,7 +35,10 @@ def get_correlation_vector(main_dataset, other_datasets):
     # Set any NaNs (due to constant values) to 0
     correlation_matrix = np.nan_to_num(correlation_matrix)
 
-    return correlation_matrix[1]
+    # We'll return the first row to get the main_dataset's correlation
+    # with the other variables, but we'll exclude the first member of
+    # that row (which is the main_dataset's correlation with itself)
+    return correlation_matrix[0][1:]
 
 # Calculates a correlation matrix showing the PCC between each pair
 # of channel sample sets
@@ -74,7 +77,7 @@ def demo():
 
     print 'Correlation vector between sample 2 and all other channels:'
     other_channels = [channel_samples[channel_name] for channel_name in channel_samples.keys() if (channel_name != 'Sample 2')]
-    print get_correlation_vector(other_channels, channel_samples['Sample 2'])
+    print get_correlation_vector(channel_samples['Sample 2'], other_channels)
 
 def main():
     demo()
