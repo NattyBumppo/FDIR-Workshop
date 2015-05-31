@@ -1,0 +1,17 @@
+{
+    "alarms": [
+        {
+            "name": "High motor voltage",
+            "triggers": [
+                "Left motor voltage > 10",
+                "Right motor voltage > 10"
+            ]
+        },
+        {
+            "name": "Overacceleration",
+            "triggers": [
+                "Average(X acceleration, Y acceleration, Z acceleration) > 5"
+            ]
+        }
+    ]
+}
