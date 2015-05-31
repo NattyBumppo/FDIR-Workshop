@@ -17,7 +17,9 @@ def get_correlation_matrix(sample_set):
 start = time.time()
 
 # Generate 1000 channels of 1000 data values each and find the correlation matrix
-channels = np.random.randn(1000, 1000)
+numChannels = 1000
+numTimesteps = 1000
+channels = np.random.randn(numChannels, numTimesteps)
 mat = get_correlation_matrix(channels)
 
 print 'Elapsed time:', time.time()-start, 'seconds'
