@@ -1,4 +1,4 @@
-{ "hierarchy":
+{ "children":
     [{
         "category": "Electrical System",
         "children":
@@ -73,7 +73,8 @@
             },
             {
                 "display_name": "Current FSM state",
-                "type": "string"
+                "type": "string",
+                "mean": "Running"
             },
                                             {
                 "display_name": "Internal health metric",

@@ -12,9 +12,9 @@ import time
 import random
 import hashlib
 from datetime import datetime
+import json
 
 defaultPortNo = 3333
-channel_filename = 'channels.meta'
 
 global_message_queue = Queue()
 
@@ -104,7 +104,7 @@ class WebSocketsHandler(SocketServer.StreamRequestHandler):
  
 
 def simulate_telemetry():
-    channels = grab_channels()
+    channels = grab_channels('channels.json')
     random.seed()
 
     # Simulate some random values and make one single
@@ -118,19 +118,23 @@ def simulate_random_values(channels):
 
     for channel in channels:
         # Append the name of the channel
-        telemetry_string += ':' + channel + ':'
-        datatype = channels[channel]['datatype']
-        units = channels[channel]['units']
+        telemetry_string += ':' + channel['display_name'] + ':'
+        datatype = channel['type']
+        if 'units' in channel:
+            units = channel['units']
+        else:
+            units = ''
+
         if (datatype == 'float'):
-            mean = float(channels[channel]['mean'])
-            stdDev = float(channels[channel]['stdDev'])
+            mean = float(channel['mean'])
+            stdDev = float(channel['stddev'])
             sim_value = simulate_value(mean, stdDev)
         elif (datatype == 'int'):
-            mean = float(channels[channel]['mean'])
-            stdDev = float(channels[channel]['stdDev'])
+            mean = float(channel['mean'])
+            stdDev = float(channel['stddev'])
             sim_value = round(simulate_value(mean, stdDev))
         else:
-            sim_value = channels[channel]['mean']
+            sim_value = channel['mean']
         # Append the simulated value
         telemetry_string += str(sim_value) + ':'
         # Append the units (for display purposes)
@@ -152,42 +156,34 @@ def get_hash(telemetry_string):
 def simulate_value(mean, stdDev):
     return random.gauss(mean, stdDev)
 
-# Grab names and properties of channels
-def grab_channels():
+# Grabs names and properties of channels from a provided .json file
+def grab_channels(channel_filename):
     channels = {}
-    channel_lines = open(channel_filename, 'r').readlines()
-    for line in channel_lines:
-        tokens = line.strip().split(',')
-        if len(tokens) > 1:
-            # print tokens
-            # Strip other delimiters from the channel name
-            channel_name = ''.join(''.join(tokens[0].split(',')).split('*')).strip()
-            datatype = tokens[1]
-            units = tokens[2]
-            mean = tokens[3]
-            stdDev = tokens[4]
-            
-            # Add collected values to dictionary
-            channel_entry = {}
-            if (datatype != '-'):
-                channel_entry['datatype'] = datatype.strip()
-            if (units != '-'):
-                channel_entry['units'] = units.strip()
-            else:
-                channel_entry['units'] = ''
-            if (mean != '-'):
-                channel_entry['mean'] = mean.strip()
-            else:
-                channel_entry['mean'] = ''
-            if (stdDev != '-'):
-                channel_entry['stdDev'] = stdDev.strip()
-            else:
-                channel_entry['stdDev'] = ''
-            if channel_name != '':
-                channels[channel_name] = channel_entry
+    with open(channel_filename) as channel_file:
+        channel_metadata = json.load(channel_file, parse_float=float, parse_int=int)
+        found_channels = find_channels(channel_metadata)
 
-    return channels
+        # print "======================RESULTS======================"
+        # print len(found_channels)
+        # for channel in found_channels:
+        #     print 'Channel found:'
+        #     print channel
+    return found_channels
 
+def find_channels(current_node):
+    found_channels = []
+
+    # First get any channels from children of this node
+    if 'children' in current_node:
+        for child_node in current_node['children']:
+            found_channels += find_channels(child_node)
+
+    # Get channels at this node 
+    if 'display_name' in current_node:
+        found_channels.append(current_node)
+
+    # Return all channels found
+    return found_channels
 
 def main():
     # Spawn a thread that runs a websocketServer
@@ -196,13 +192,16 @@ def main():
     worker.start()
 
     # Simulate telemetry and send it to the client indefinitely
-    for i in range(5):
+    while True:
         telemetry_this_frame = simulate_telemetry()
         global_message_queue.put(telemetry_this_frame)
         time.sleep(1)
 
-    # Cleanup and end
+    # Clean up and end
     worker.join(1)
+
+    grab_channels('channels.json')
+
 
 if __name__ == "__main__":
     main()
