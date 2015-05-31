@@ -1,27 +1,17 @@
-{ 
-    "alarms":
-    [{
-      "display_name": "Sample 2",
-      "time_start": 0,
-      "time_span": 1000,
-      "values": [
-        35, 220, 10, 45, 170, 25, 73, 100, 150, 85, 87, 10, 200, 120, 125, 18, 28, 100, 38, 210
-      ]
-    },
-    {
-      "display_name": "Sample 2",
-      "time_start": 0,
-      "time_span": 1000,
-      "values": [
-        35, 220, 10, 45, 170, 25, 73, 100, 150, 85, 87, 10, 200, 120, 125, 18, 28, 100, 38, 210
-      ]
-    },
-    {
-      "display_name": "Sample 2",
-      "time_start": 0,
-      "time_span": 1000,
-      "values": [
-        35, 220, 10, 45, 170, 25, 73, 100, 150, 85, 87, 10, 200, 120, 125, 18, 28, 100, 38, 210
-      ]
-    }]
+{
+    "alarms": [
+        {
+            "name": "High motor voltage",
+            "triggers": [
+                "Left motor voltage > 10",
+                "Right motor voltage > 10"
+            ]
+        },
+        {
+            "name": "Overacceleration",
+            "triggers": [
+                "Average(X acceleration, Y acceleration, Z acceleration) > 5"
+            ]
+        }
+    ]
 }
