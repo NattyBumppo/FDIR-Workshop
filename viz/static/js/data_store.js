@@ -8,7 +8,8 @@
   var detail_data = {};
 
   var correlation_data = {};
-  var display_size = 6;
+  var display_size = 6; // Number of data points to show on the graph
+  var max_empty_requests = 5; // Max requests with empty results before stopping requesting
 
   data_store.temp = function() {
     return detail_data;
@@ -20,6 +21,14 @@
       // No data, thus need to fetch
       fetchData(channel, {include_time: time}, time, display_cb);
     } else {
+      // Check if there has been no new data for a while
+      // because then we should not request more
+      // This may be better handled differently once we have a
+      // better idea of the architecture
+      if(detail_data[channel].consecutive_empty_fetches > max_empty_requests) {
+        return false;
+      }
+
       // We have some, but need to check if we have it for this time
 
       // If it exists already, just call the callback
@@ -68,7 +77,15 @@
       if(detail_data[channel] == undefined) {
         // Need to add all the data
         detail_data[channel] = data;
+
+        // This tracks to ensure requests are ignored if
+        // a newer one arrives first
         detail_data[channel].last_updated = time;
+
+        // This tracks to see when there is no more data
+        // for the channel. Semi-hacky way of stopping
+        // requesting for now.
+        detail_data[channel].consecutive_empty_fetches = 0;
       } else {
         // Just need to append, if this is the newest known request
         if(time > detail_data[channel].last_updated) {
@@ -80,6 +97,12 @@
           // be single thread. I'm not certain how this applies to
           // AJAX, but will look further to make certain we're good.
           detail_data[channel].last_updated = time;
+
+          if(data.values.length == 0) {
+            detail_data[channel].consecutive_empty_fetches++;
+          } else {
+            detail_data[channel].consecutive_empty_fetches = 0;
+          }
         } else {
           return false; // Ignore because a newer and superseding request already arrived
         }
