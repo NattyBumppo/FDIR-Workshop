@@ -24,7 +24,7 @@
   function setupCorrelationVector() {
     correlation.bind('#correlation_vector');
 
-    correlation.display('sample_correlation');
+    correlation.display('sample_1', 5000);
   }
 
 }(window.controller = window.controller || {}, jQuery));

@@ -9,9 +9,9 @@
     correlation_area = $(selector);
   }
 
-  correlation.display = function(channel) {
+  correlation.display = function(channel, time) {
     // We may want to make this a callback controlled system for the display?
-    data_store.getCorrelated(channel, display_cb);
+    data_store.getCorrelated(channel, time, display_cb);
   }
 
   correlation.hide = function() {
@@ -19,15 +19,15 @@
   }
 
   // Callback function that handles displaying the results
-  function display_cb(results) {
-    for(var i=0;i<results.entries.length;i++) {
+  function display_cb(corr_vector) {
+    for(var i=0;i<corr_vector.length;i++) {
       if(i % num_cols == 0) {
         correlation_area.append(
           $(document.createElement('div')).addClass('row')
         );
       }
 
-      correlation_area.children().last().append(createCorrelationTile(results.entries[i]));
+      correlation_area.children().last().append(createCorrelationTile(corr_vector[i]));
     }
   }
 
@@ -45,12 +45,12 @@
     var marker = $(document.createElement('div'));
 
     marker.addClass('correlation_marker');
-    marker.css('background', 'rgba(211, 0, 0, ' + info.score + ')');
+    marker.css('background', 'rgba(211, 0, 0, ' + info.correlation + ')');
 
     var label = $(document.createElement('div'));
 
     label.addClass('correlation_label col-md-8');
-    label.html(info.name);
+    label.html(info.display_name);
 
     marker_container.append(marker);
 
