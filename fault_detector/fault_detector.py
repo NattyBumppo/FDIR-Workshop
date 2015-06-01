@@ -56,7 +56,7 @@ def lastn(numbers, i, n):
         # Changes number of values returned so that
         # it won't go past the beginning of the list
         n = i;
-    return numbers[i-n:n]
+    return numbers[i+1-n:i+1]
 
 # Identifies all of the data items in the provided channels which
 # trigger the provided alarms
@@ -70,20 +70,25 @@ def get_faults(channel_samples, time_start, time_step, alarms):
 
     # Now go through all samples for each channel and
     # check for fault violations
+    faults = []
     c = channel_samples
     for i in range(numSamples):
         for alarm in alarms:
             for trigger in alarm['triggers']:
                 try:
-                    if eval(trigger):                    
-                        print 'Fault triggered at time =', time_start + time_step * i
-                        print trigger + ' FALSE'
-                        print 'Fault name:', alarm['name']
+                    if eval(trigger):
+                        # Fault triggered; add to list
+                        fault = {}
+                        fault['name'] = alarm['name']
+                        fault['trigger'] = trigger
+                        fault['time'] = time_start + time_step * i
+                        faults.append(fault)
                     else:
-                        print 'Not triggered.'
+                        # No fault
+                        pass
                 except KeyError, e:
                     print 'Channel', e, 'not found'
-                
+    return faults
 
 # Demonstrates basic fault detection functionality
 def demo():
@@ -103,6 +108,7 @@ def demo():
     # Get list of faults and their corresponding times and associated channel names
     faults = get_faults(channel_samples, time_start, time_step, alarms)
 
+    print faults
 
 
 def main():
