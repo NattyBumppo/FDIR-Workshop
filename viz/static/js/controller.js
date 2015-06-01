@@ -8,6 +8,7 @@
   function initAll() {
     setupGraphs();
     setupCorrelationVector();
+    setupCorrelationMatrix();
 
     timer.start(1000);
   }
@@ -22,9 +23,15 @@
   }
 
   function setupCorrelationVector() {
-    correlation.bind('#correlation_vector');
+    correlation_vector.bind('#correlation_vector');
 
-    correlation.display('sample_1', 5000);
+    correlation_vector.display('sample_1', 5000);
+  }
+
+  function setupCorrelationMatrix() {
+    correlation_matrix.bind('#correlation_matrix');
+
+    correlation_matrix.display(5000);
   }
 
 }(window.controller = window.controller || {}, jQuery));

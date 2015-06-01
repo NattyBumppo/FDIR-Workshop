@@ -138,7 +138,7 @@ def correlation_vector(channel):
         }
         for (i, name)
         in enumerate(channel_values.keys())
-    ]
+    ] # Order should be preserved
 
     # Sort in place based on correlation
     corr_map.sort(key=operator.itemgetter('correlation'), reverse=True)
@@ -146,12 +146,65 @@ def correlation_vector(channel):
     if limit > -1:
         corr_map = corr_map[0:limit]
 
-    info = {
+    response_info = {
         'status': 'SUCCESS',
         'correlation_vector': corr_map
     }
 
-    return json.dumps(info)
+    return json.dumps(response_info)
+
+# As noted above, this functionality relies on the assumption of data regularity
+# This should be addressed later, probably, to enforce appropriate constraints
+@app.route('/correlation_matrix')
+def correlation_matrix():
+    time = request.args.get('time', None)
+
+    if time is None:
+        return json_error('time must be specified')
+
+    time = int(float(time))
+
+    # First read in a random channel
+    with open(relative_path('data/' + next(iter(valid_channels)) + '.json')) as channel_file:
+        general_info = json.load(channel_file)
+
+    # Determine starting and ending indices of the slices
+    # See the note about regularity above
+    time_index = calculate_index(general_info, time)
+
+    # It would be nice to check that time is valid, but for now we're assuming
+    # that it is a valid time. Later we could check against a random channel, or such
+
+    # We want to push the window forward if we can
+    # Note the similar section in correlation vector, and it's comment
+    # Note also the use of the first valid channel's info
+    end_index = min(time_index + post_frame_size, len(general_info['values']) - 1)
+
+    # Now we push the window backward if we can
+    start_index = max(time_index - pre_frame_size, 0)
+
+    # We continue by reading in all the data files
+    channel_values = {}
+    channel_names = {}
+    for channel_name in valid_channels:
+        with open(relative_path('data/' + channel_name + '.json')) as channel_file:
+            info = json.load(channel_file)
+            channel_values[channel_name] = info['values'][start_index:end_index]
+            channel_names[channel_name] = info.get('display_name', channel_name)
+
+    # Now we can get the correlation matrix
+
+    corr_matrix = correlator.get_correlation_matrix(channel_values.values())
+
+    name_list = [channel_names[name] for name in channel_values.keys()] # Order should be preserved
+
+    response_info = {
+        'status': 'SUCCESS',
+        'channel_names': name_list,
+        'correlation_matrix': corr_matrix.tolist()
+    }
+
+    return json.dumps(response_info)
 
 # Below are helper methods
 

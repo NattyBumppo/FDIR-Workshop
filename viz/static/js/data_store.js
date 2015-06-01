@@ -51,12 +51,20 @@
   }
 
   data_store.getCorrelated = function(channel, time, display_cb) {
-    var range = {
+    var params = {
       time: time,
       limit: max_num_correlated
     };
 
-    $.get('/correlation_vector/' + channel, range, makeCorrelatedHandler(display_cb), 'json');
+    $.get('/correlation_vector/' + channel, params, makeCorrelatedHandler(display_cb), 'json');
+  }
+
+  data_store.getCorrelationMatrix = function(time, display_cb) {
+    var params = {
+      time: time
+    };
+
+    $.get('/correlation_matrix', params, makeCorrelatedHandler(display_cb), 'json');
   }
 
   function getLastDataTime(channel) {
@@ -172,10 +180,8 @@
   function makeCorrelatedHandler(display_cb) {
     return function(data) {
       if(data.status == 'SUCCESS') {
-        console.log('what');
-        console.log(data);
         // Here's where the data will be cached, potentially
-        display_cb(data.correlation_vector);
+        display_cb(data);
       }
     };
   }

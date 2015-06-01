@@ -19,7 +19,8 @@
   }
 
   // Callback function that handles displaying the results
-  function display_cb(corr_vector) {
+  function display_cb(data) {
+    var corr_vector = data.correlation_vector;
     for(var i=0;i<corr_vector.length;i++) {
       if(i % num_cols == 0) {
         correlation_area.append(
@@ -60,4 +61,4 @@
     return tile;
   }
 
-}(window.correlation = window.correlation || {}, jQuery));
+}(window.correlation_vector = window.correlation_vector || {}, jQuery));
