@@ -10,6 +10,7 @@
   var correlation_data = {};
   var display_size = 6; // Number of data points to show on the graph
   var max_empty_requests = 5; // Max requests with empty results before stopping requesting
+  var max_num_correlated = 20; // Max number of channels to show for correlation vector
 
   data_store.temp = function() {
     return detail_data;
@@ -49,13 +50,13 @@
     }
   }
 
-  data_store.getCorrelated = function(channel, display_cb) {
+  data_store.getCorrelated = function(channel, time, display_cb) {
     var range = {
-      start: 'start_date',
-      end: 'end_date'
+      time: time,
+      limit: max_num_correlated
     };
 
-    $.get('/static/data/correlation_temp.json', range, makeCorrelatedHandler(display_cb), 'json');
+    $.get('/correlation_vector/' + channel, range, makeCorrelatedHandler(display_cb), 'json');
   }
 
   function getLastDataTime(channel) {
@@ -170,8 +171,12 @@
   // be replaced by an anonymous function in place
   function makeCorrelatedHandler(display_cb) {
     return function(data) {
-      // Here's where the data will be cached, potentially
-      display_cb(data);
+      if(data.status == 'SUCCESS') {
+        console.log('what');
+        console.log(data);
+        // Here's where the data will be cached, potentially
+        display_cb(data.correlation_vector);
+      }
     };
   }
 

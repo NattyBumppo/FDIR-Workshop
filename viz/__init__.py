@@ -113,9 +113,12 @@ def correlation_vector(channel):
 
     # Now read in the appropriate channel slices
     channel_values = {}
+    channel_names = {}
     for channel_name in valid_channels:
         with open(relative_path('data/' + channel_name + '.json')) as channel_file:
-            channel_values[channel_name] = json.load(channel_file)['values'][start_index:end_index]
+            info = json.load(channel_file)
+            channel_values[channel_name] = info['values'][start_index:end_index]
+            channel_names[channel_name] = info.get('display_name', channel_name)
 
     main_channel = channel_values.pop(channel)
 
@@ -129,7 +132,8 @@ def correlation_vector(channel):
     # We also normalize scores from [-1, 1] => [0, 1]
     corr_map = [
         {
-            'name': name,
+            'name': name, # Internal name
+            'display_name': channel_names[name], # Set display name
             'correlation': (corr_vector[i] + 1) / 2.0
         }
         for (i, name)
@@ -144,7 +148,7 @@ def correlation_vector(channel):
 
     info = {
         'status': 'SUCCESS',
-        'corrrelation_vector': corr_map
+        'correlation_vector': corr_map
     }
 
     return json.dumps(info)
