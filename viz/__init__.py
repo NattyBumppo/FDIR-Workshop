@@ -3,6 +3,7 @@ import json
 from math import ceil
 import imp
 import os
+import operator
 from correlator import correlator
 
 # Create Flask app
@@ -10,7 +11,7 @@ app = Flask(__name__)
 
 # Later we will want to pull this from a file, or autogenerate,
 # but this prevents arbitrary file access by whitelisting channels
-valid_channels = set(['sample_1', 'sample_2'])
+valid_channels = set(['sample_1', 'sample_2', 'twice_sample_2', 'negative_correlation_sample_2'])
 
 batch_size = 12
 pre_frame_size = 3 # This is the amount before the 'time' to look for correlation
@@ -34,12 +35,12 @@ def fetch_data(channel):
     if include_time is None:
         return json_error('include_time is required')
     else:
-        include_time = int(include_time)
+        include_time = int(float(include_time))
 
     if start_time is None:
         start_time = include_time
     else:
-        start_time = int(start_time)
+        start_time = int(float(start_time))
 
     if include_time < start_time:
         return json_error('include_time cannot be earlier than start_time')
@@ -81,11 +82,12 @@ def fetch_data(channel):
 @app.route('/correlation_vector/<channel>')
 def correlation_vector(channel):
     time = request.args.get('time', None)
+    limit = int(float(request.args.get('limit', -1)))
 
     if time is None:
         return json_error('time must be specified')
 
-    time = int(time)
+    time = int(float(time))
 
     if not is_valid_channel(channel):
         return json_error('Invalid channel name.')
@@ -117,9 +119,35 @@ def correlation_vector(channel):
 
     main_channel = channel_values.pop(channel)
 
-    correlation_vector = correlator.get_correlation_vector(main_channel, channel_values.values())
+    # Calculate the correlation vector
+    corr_vector = correlator.get_correlation_vector(main_channel, channel_values.values())
 
-    return str(correlation_vector)
+    # This creates an array of dictionaries, matching name to correlation, which
+    # we can then sort, and slice, to return only a subset. This could be done on
+    # the client, but will require less data transfer if done here. If sending all
+    # we could just make it a dictionary comprehension, and dump that as json
+    # We also normalize scores from [-1, 1] => [0, 1]
+    corr_map = [
+        {
+            'name': name,
+            'correlation': (corr_vector[i] + 1) / 2.0
+        }
+        for (i, name)
+        in enumerate(channel_values.keys())
+    ]
+
+    # Sort in place based on correlation
+    corr_map.sort(key=operator.itemgetter('correlation'), reverse=True)
+
+    if limit > -1:
+        corr_map = corr_map[0:limit]
+
+    info = {
+        'status': 'SUCCESS',
+        'corrrelation_vector': corr_map
+    }
+
+    return json.dumps(info)
 
 # Below are helper methods
 
