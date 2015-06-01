@@ -13,6 +13,7 @@ import random
 import hashlib
 from datetime import datetime
 import json
+import os
 
 defaultPortNo = 3333
 
@@ -184,6 +185,40 @@ def find_channels(current_node):
 
     # Return all channels found
     return found_channels
+
+# Generates the specified number of timesteps' worth of artificial data,
+# for all channels, and saves under the specified directory name
+def generate_artificial_data(time_start, time_span, num_timesteps, directory_name):
+    channels = grab_channels('channels.json')
+    random.seed()
+
+    for channel in channels:
+        # Set time-related properties
+        channel['time_start'] = time_start
+        channel['time_span'] = time_span        
+        
+        # Add simulated data based on mean and stddev
+        values = []
+        for i in range(num_timesteps):
+            datatype = channel['type']
+            if (datatype == 'float'):
+                mean = float(channel['mean'])
+                stdDev = float(channel['stddev'])
+                sim_value = simulate_value(mean, stdDev)
+            elif (datatype == 'int'):
+                mean = float(channel['mean'])
+                stdDev = float(channel['stddev'])
+                sim_value = round(simulate_value(mean, stdDev))
+            else:
+                sim_value = channel['mean']
+            values.append(sim_value)
+        channel['values'] = values
+
+        if not os.path.exists(directory_name):
+            os.makedirs(directory_name)
+
+        with open(directory_name + '/' + channel['display_name'] + '.json', 'w') as outfile:
+            json.dump(channel, outfile)
 
 def main():
     # Spawn a thread that runs a websocketServer
