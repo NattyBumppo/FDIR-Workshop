@@ -46,7 +46,9 @@
     var marker = $(document.createElement('div'));
 
     marker.addClass('correlation_marker');
-    marker.css('background', 'rgba(211, 0, 0, ' + info.correlation + ')');
+
+    var marker_color = (info.correlation >= 0) ? [211, 0, 0] : [0, 0, 211];
+    marker.css('background', 'rgba(' + marker_color.join(', ') + ', ' + Math.abs(info.correlation) + ')');
 
     var label = $(document.createElement('div'));
 

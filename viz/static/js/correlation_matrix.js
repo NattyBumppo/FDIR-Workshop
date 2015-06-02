@@ -178,10 +178,10 @@
     ).style(
       {
         'fill-opacity': function(d) {
-          return z(d.correlation);
+          return z(Math.abs(d.correlation));
         },
         'fill': function(d) {
-          return c(1); // Need to set this later appropriately. Potentially based on categories
+          return (d.correlation >= 0) ? c(1) :  c(0);
         }
       }
     ).on('mouseover', cellMouseover).on('mouseout', cellMouseout);

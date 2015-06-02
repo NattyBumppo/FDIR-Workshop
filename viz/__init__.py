@@ -3,7 +3,6 @@ import json
 from math import ceil
 import imp
 import os
-import operator
 from correlator import correlator
 
 # Create Flask app
@@ -134,14 +133,14 @@ def correlation_vector(channel):
         {
             'name': name, # Internal name
             'display_name': channel_names[name], # Set display name
-            'correlation': (corr_vector[i] + 1) / 2.0
+            'correlation': corr_vector[i]
         }
         for (i, name)
         in enumerate(channel_values.keys())
     ] # Order should be preserved
 
-    # Sort in place based on correlation
-    corr_map.sort(key=operator.itemgetter('correlation'), reverse=True)
+    # Sort in place based on absolute value of correlation
+    corr_map.sort(key=lambda k: abs(k['correlation']), reverse=True)
 
     if limit > -1:
         corr_map = corr_map[0:limit]
@@ -201,7 +200,7 @@ def correlation_matrix():
     response_info = {
         'status': 'SUCCESS',
         'channel_names': name_list,
-        'correlation_matrix': [[(corr + 1) / 2.0 for corr in row] for row in corr_matrix]
+        'correlation_matrix': corr_matrix.tolist()
     }
 
     return json.dumps(response_info)
