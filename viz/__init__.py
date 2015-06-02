@@ -201,7 +201,7 @@ def correlation_matrix():
     response_info = {
         'status': 'SUCCESS',
         'channel_names': name_list,
-        'correlation_matrix': corr_matrix.tolist()
+        'correlation_matrix': [[(corr + 1) / 2.0 for corr in row] for row in corr_matrix]
     }
 
     return json.dumps(response_info)

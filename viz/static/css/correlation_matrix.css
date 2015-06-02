@@ -1,0 +1,11 @@
+.cm-background {
+  fill: #EEE;
+}
+
+line {
+  stroke: #FFF;
+}
+
+text.active {
+  fill: #F00;
+}

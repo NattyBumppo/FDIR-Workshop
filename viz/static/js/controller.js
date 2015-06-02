@@ -30,6 +30,7 @@
 
   function setupCorrelationMatrix() {
     correlation_matrix.bind('#correlation_matrix');
+    correlation_matrix.setup(720, 720);
 
     correlation_matrix.display(5000);
   }
