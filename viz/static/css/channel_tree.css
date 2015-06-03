@@ -1,0 +1,16 @@
+.node circle {
+  cursor: pointer;
+  fill: #FFF;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font-size: 11px;
+}
+
+path.link {
+  fill: none;
+  stroke: #CCC;
+  stroke-width: 1.5px;
+}

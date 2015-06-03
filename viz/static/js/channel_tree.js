@@ -168,6 +168,8 @@
 
     node_exit.select('circle').attr('r', 1e-6);
 
+    node_exit.select('text').style('fill-opacity', 1e-6);
+
     var link = vis.selectAll('path.link').data(
       tree.links(nodes),
       function(d) {
@@ -193,6 +195,8 @@
         }
       }
     ).transition().duration(duration).attr('d', diagonal);
+
+    link.transition().duration(duration).attr('d', diagonal);
 
     link.exit().transition().duration(duration).attr(
       'd',
