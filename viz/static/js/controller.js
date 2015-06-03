@@ -6,11 +6,18 @@
   $(document).ready(initAll);
 
   function initAll() {
+    setupChannelTree();
     setupGraphs();
     setupCorrelationVector();
     setupCorrelationMatrix();
 
     timer.start(1000);
+  }
+
+  function setupChannelTree() {
+    channel_tree.bind('#channel_tree');
+    channel_tree.setup(800, 500);
+    channel_tree.display(5000);// Right now this time is ignored
   }
 
   function setupGraphs() {

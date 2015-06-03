@@ -1,4 +1,6 @@
-{ "children":
+{
+  "category": "System",
+  "children":
     [{
         "category": "Electrical System",
         "children":

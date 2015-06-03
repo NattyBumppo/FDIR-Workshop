@@ -56,7 +56,7 @@
       limit: max_num_correlated
     };
 
-    $.get('/correlation_vector/' + channel, params, makeCorrelatedHandler(display_cb), 'json');
+    $.get('/correlation_vector/' + channel, params, makeCorrelatedHandler(display_cb, true), 'json');
   }
 
   data_store.getCorrelationMatrix = function(time, display_cb) {
@@ -64,7 +64,13 @@
       time: time
     };
 
-    $.get('/correlation_matrix', params, makeCorrelatedHandler(display_cb), 'json');
+    $.get('/correlation_matrix', params, makeCorrelatedHandler(display_cb, true), 'json');
+  }
+
+  // This may later take a time, and also include returning the
+  // channel statuses, as well.
+  data_store.getChannels = function(display_cb) {
+    $.get('/static/data/channels.json', {}, makeCorrelatedHandler(display_cb, false), 'json');
   }
 
   function getLastDataTime(channel) {
@@ -177,9 +183,9 @@
 
   // This function could easily be made general, or
   // be replaced by an anonymous function in place
-  function makeCorrelatedHandler(display_cb) {
+  function makeCorrelatedHandler(display_cb, check_status) {
     return function(data) {
-      if(data.status == 'SUCCESS') {
+      if(!check_status || data.status == 'SUCCESS') {
         // Here's where the data will be cached, potentially
         display_cb(data);
       }
