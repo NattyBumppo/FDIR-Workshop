@@ -17,7 +17,12 @@
   timer.pause = function() {
     if(interval) {
       clearInterval(interval);
+      interval = undefined;
     }
+  }
+
+  timer.isRunning = function() {
+    return !!interval;// Explicit bool so as not to leak interval
   }
 
   timer.setTime = function(new_time) {

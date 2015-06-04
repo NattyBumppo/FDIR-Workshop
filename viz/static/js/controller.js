@@ -11,6 +11,8 @@
     setupCorrelationVector();
     setupCorrelationMatrix();
 
+    setupPauseControl();
+
     timer.start(1000);
   }
 
@@ -24,6 +26,21 @@
       },
       6000
     );
+  }
+
+  function setupPauseControl() {
+    $('#pause_control').click(handlePauseControl);
+  }
+
+  function handlePauseControl() {
+    var control = $('#pause_control');
+    if(timer.isRunning()) {
+      timer.pause();
+      control.text('Restart');
+    } else {
+      timer.unpause();
+      control.text('Pause');
+    }
   }
 
   function setupGraphs() {
