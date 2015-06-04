@@ -38,7 +38,7 @@
     draw_matrix(data);// May want to condense these, as this is currently unnecessary
   }
 
-  // This function draw the matrix. It is closely based on the sample
+  // This function draws the matrix. It is closely based on the sample
   // code from Mike Bostock at http://bost.ocks.org/mike/miserables/
   // It is currently being adapted to work with our data
   function draw_matrix(data) {
