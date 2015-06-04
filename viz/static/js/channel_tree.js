@@ -5,6 +5,7 @@
   var tree;
   var root;
   var vis;
+  var node_map = {};
 
   var margins = [20, 120, 20, 120];
   var diagonal = d3.svg.diagonal().projection(
@@ -14,8 +15,32 @@
   );
   var counter = 0;
 
+  var light_green = '#92CF8F';
+  var light_red = '#CF8F95';
+
   channel_tree.bind = function(selector) {
     tree_area = $(selector);
+  }
+
+  channel_tree.markFaulted = function(node_name) {
+    if(node_map[node_name]) {
+      node_map[node_name].faulted = true;
+      redraw();
+    }
+  }
+
+  channel_tree.clearFaulted = function(node_name) {
+    if(node_map[node_name]) {
+      node_map[node_name].faulted = false;
+      redraw();
+    }
+  }
+
+  channel_tree.clearAllFaulted = function() {
+    for(var node_name in node_map) {
+      node_map[node_name].faulted = false;
+      redraw();
+    }
   }
 
   channel_tree.setup = function(w, h) {
@@ -33,8 +58,45 @@
     data_store.getChannels(display_cb);
   }
 
+  function redraw() {
+    update(root);
+  }
+
   function display_cb(data) {
+    build_node_map(data);
     draw_tree(data);// As in corr matrix case, may want to condense this
+  }
+
+  // This function builds up a node map from node names
+  // so that we don't have to crawl the hierarchy every time we want
+  // to find the node
+  function build_node_map(node) {
+    if(node.id_name) {
+      node.faulted = false;
+      node_map[node.id_name] = node;
+    }
+
+    // Technically these could be an if-else with the current setup,
+    // but I don't want to necessarily make that assumption always, eventually
+
+    if(node.children) {
+      node.children.forEach(build_node_map);
+    }
+  }
+
+  // Returns true if the node is a leaf node and faulted,
+  // or if it has any faulted children
+  function is_node_faulted(node) {
+    if(node.children || node._children) {
+      return (node.children || node._children).map(is_node_faulted).reduce(
+        function(fault_status, child_status) {
+          return fault_status || child_status;
+        },
+        false
+      );
+    } else {
+      return node.faulted;
+    }
   }
 
   // This is modified code based somewhat on code from
@@ -120,10 +182,18 @@
       }
     );
 
-    node_enter.append('circle').attr('r', 1e-6).style(
+    node_enter.append('circle').attr(
+      {
+        'r': 1e-6,
+        'class': function(d) {
+          return is_node_faulted(d) ? 'faulted' : '';
+        }
+      }
+    ).style(
       'fill',
       function(d) {
-        return d._children ? '#92CF8F' : '#FFF';
+        var node_color = is_node_faulted(d) ? light_red : light_green;
+        return d._children ? node_color : '#FFF';
       }
     );
 
@@ -150,10 +220,18 @@
       }
     );
 
-    node_update.select('circle').attr('r', 4.5).style(
+    node_update.select('circle').attr(
+      {
+        'r': 4.5,
+        'class': function(d) {
+          return is_node_faulted(d) ? 'faulted' : '';
+        }
+      }
+    ).style(
       'fill',
       function(d) {
-        return d._children ? '#92CF8F' : '#FFF';
+        var node_color = is_node_faulted(d) ? light_red : light_green;
+        return d._children ? node_color : '#FFF';
       }
     );
 

@@ -8,9 +8,10 @@
         [{
             "category": "Left Motor",
             "children":
-            [ 
+            [
                 {
                     "display_name": "Left motor current draw",
+                    "id_name": "left_motor_current_draw",
                     "type": "float",
                     "units": "A",
                     "mean": 5.0,
@@ -18,6 +19,7 @@
                 },
                 {
                     "display_name": "Left motor voltage",
+                    "id_name": "left_motor_voltage",
                     "type": "float",
                     "units": "V",
                     "mean": 7.0,
@@ -29,9 +31,10 @@
         {
             "category": "Right Motor",
             "children":
-            [ 
+            [
                 {
                     "display_name": "Right motor current draw",
+                    "id_name": "right_motor_current_draw",
                     "type": "float",
                     "units": "A",
                     "mean": 5.0,
@@ -39,6 +42,7 @@
                 },
                 {
                     "display_name": "Right motor voltage",
+                    "id_name": "right_motor_voltage",
                     "type": "float",
                     "units": "V",
                     "mean": 7.0,
@@ -55,12 +59,14 @@
         [
             {
                 "display_name": "Cores in use",
+                "id_name": "cores_in_use",
                 "type": "int",
                 "mean": 4,
                 "stddev": 0.4
             },
             {
                 "display_name": "Total CPU usage",
+                "id_name": "total_cpu_usage",
                 "type": "float",
                 "units": "%",
                 "mean": 50.0,
@@ -68,6 +74,7 @@
             },
             {
                 "display_name": "Total used RAM",
+                "id_name": "total_used_ram",
                 "type": "float",
                 "units": "MB",
                 "mean": 500.0,
@@ -75,11 +82,13 @@
             },
             {
                 "display_name": "Current FSM state",
+                "id_name": "current_fsm_state",
                 "type": "string",
                 "mean": "Running"
             },
                                             {
                 "display_name": "Internal health metric",
+                "id_name": "internal_health_metric",
                 "type": "float",
                 "units": "",
                 "mean": 80.0,
@@ -97,6 +106,7 @@
             [ 
                 {
                     "display_name": "X rotation",
+                    "id_name": "x_rotation",
                     "type": "float",
                     "units": "degrees",
                     "mean": 0,
@@ -104,6 +114,7 @@
                 },
                 {
                     "display_name": "Y rotation",
+                    "id_name": "y_rotation",
                     "type": "float",
                     "units": "degrees",
                     "mean": 0,
@@ -111,11 +122,12 @@
                 },
                 {
                     "display_name": "Z rotation",
+                    "id_name": "z_rotation",
                     "type": "float",
                     "units": "degrees",
                     "mean": 0,
                     "stddev": 0.3
-                }                
+                }
             ]
 
         },
@@ -125,6 +137,7 @@
             [ 
                 {
                     "display_name": "X acceleration",
+                    "id_name": "x_acceleration",
                     "type": "float",
                     "units": "g",
                     "mean": 0,
@@ -132,6 +145,7 @@
                 },
                 {
                     "display_name": "Y acceleration",
+                    "id_name": "y_acceleration",
                     "type": "float",
                     "units": "g",
                     "mean": 0,
@@ -139,11 +153,12 @@
                 },
                 {
                     "display_name": "Z acceleration",
+                    "id_name": "z_acceleration",
                     "type": "float",
                     "units": "g",
                     "mean": 0,
                     "stddev": 0.2
-                }                
+                }
             ]
 
         }]

@@ -18,6 +18,12 @@
     channel_tree.bind('#channel_tree');
     channel_tree.setup(800, 500);
     channel_tree.display(5000);// Right now this time is ignored
+    setTimeout(
+      function() {
+        channel_tree.markFaulted('left_motor_voltage');
+      },
+      6000
+    );
   }
 
   function setupGraphs() {

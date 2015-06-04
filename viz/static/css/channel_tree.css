@@ -5,6 +5,10 @@
   stroke-width: 1.5px;
 }
 
+.node circle.faulted {
+  stroke: #B44651;
+}
+
 .node text {
   font-size: 11px;
 }
