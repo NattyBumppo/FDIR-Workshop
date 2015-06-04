@@ -123,7 +123,7 @@
     node_enter.append('circle').attr('r', 1e-6).style(
       'fill',
       function(d) {
-        return d._children ? 'lightsteelblue' : '#FFF';
+        return d._children ? '#92CF8F' : '#FFF';
       }
     );
 
@@ -153,7 +153,7 @@
     node_update.select('circle').attr('r', 4.5).style(
       'fill',
       function(d) {
-        return d._children ? 'lightsteelblue' : '#FFF';
+        return d._children ? '#92CF8F' : '#FFF';
       }
     );
 
