@@ -1,7 +1,6 @@
 (function(correlation, $, undefined) {
   var correlation_area;
   var nodes;
-  var matrix;
   var width;
   var height;
 
@@ -19,18 +18,23 @@
     correlation_area = $(selector);
   }
 
-  correlation.setup = function(w, h) {
+  correlation.setSize = function(w, h) {
     width = w;
     height = h;
     x = d3.scale.ordinal().rangeBands([0, width]);
   }
 
   correlation.display = function(time) {
+    // First reset everything, in case an existing
+    // matrix is already displayed
+    correlation.clear();
+
     data_store.getCorrelationMatrix(time, display_cb);
   }
 
-  correlation.hide = function() {
+  correlation.clear = function() {
     correlation_area.empty();
+    nodes = undefined;
   }
 
   // Callback function that handles displaying the results

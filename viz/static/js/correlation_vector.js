@@ -4,17 +4,25 @@
   // Settings
   var num_cols = 3;
   var col_divisions = 12; // Bootstrap setting
+  var channel;
 
   correlation.bind = function(selector) {
     correlation_area = $(selector);
   }
 
-  correlation.display = function(channel, time) {
+  correlation.setChannel = function(channel_name) {
+    channel = channel_name;
+  }
+
+  correlation.display = function(time) {
+    // First reset everything, in case existing drawing
+    correlation.clear();
+
     // We may want to make this a callback controlled system for the display?
     data_store.getCorrelated(channel, time, display_cb);
   }
 
-  correlation.hide = function() {
+  correlation.clear = function() {
     correlation_area.empty();
   }
 

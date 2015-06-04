@@ -4,12 +4,12 @@
   var delta;
   var time = 0;
 
-  // Later on this can include information on the interval
-  // so we don't update things every frame unless necessary
-  timer.registerUpdater = function(updater) {
+  timer.registerUpdater = function(updater, span) {
     updaters.push(
       {
-        handler: updater
+        handler: updater,
+        span: span,
+        elapsed: span
       }
     );
   }
@@ -22,6 +22,11 @@
 
   timer.setTime = function(new_time) {
     time = new_time;
+
+    // Set all things to update on next draw
+    for(var i=0;i<updaters.length;i++) {
+      updaters[i].elapsed = updater[i].span;
+    }
   }
 
   timer.getTime = function() {
@@ -43,7 +48,15 @@
   function handleUpdaters() {
     time += delta;
     for(var i=0;i<updaters.length;i++) {
-      updaters[i].handler(time);
+      updaters[i].elapsed += delta;
+
+      if(updaters[i].elapsed >= updaters[i].span) {
+        // Reset counter
+        updaters[i].elapsed = 0;
+
+        // Call the updater
+        updaters[i].handler(time);
+      }
     }
   }
 

@@ -32,20 +32,22 @@
     graph_drawer.addGraph('sample_1');
     graph_drawer.addGraph('sample_2');
 
-    timer.registerUpdater(graph_drawer.updateGraphs);// Probably will move this into graph_drawer
+    timer.registerUpdater(graph_drawer.updateGraphs, 1000);// Probably will move this into graph_drawer
   }
 
   function setupCorrelationVector() {
     correlation_vector.bind('#correlation_vector');
 
-    correlation_vector.display('sample_1', 5000);
+    correlation_vector.setChannel('sample_1');
+
+    timer.registerUpdater(correlation_vector.display, 10000);
   }
 
   function setupCorrelationMatrix() {
     correlation_matrix.bind('#correlation_matrix');
-    correlation_matrix.setup(720, 720);
+    correlation_matrix.setSize(720, 720);
 
-    correlation_matrix.display(5000);
+    timer.registerUpdater(correlation_matrix.display, 10000);
   }
 
 }(window.controller = window.controller || {}, jQuery));
