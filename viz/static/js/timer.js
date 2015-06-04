@@ -30,9 +30,14 @@
 
   timer.start = function(span) {
     delta = span;
-    timer.pause();
+    time = -span;
 
-    interval = setInterval(handleUpdaters, span);
+    timer.unpause();
+  }
+
+  timer.unpause = function() {
+    timer.pause();
+    interval = setInterval(handleUpdaters, delta);
   }
 
   function handleUpdaters() {

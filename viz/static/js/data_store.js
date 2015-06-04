@@ -17,35 +17,48 @@
   }
 
   data_store.getData = function(channel, time, display_cb) {
+    proxyDataRequest(channel, time, display_cb, getDetailData);
+  }
+
+  data_store.getDatum = function(channel, time, display_cb) {
+    proxyDataRequest(channel, time, display_cb, getDetailDatum);
+  }
+
+  function proxyDataRequest(channel, time, display_cb, extractor) {
     // Check if there is any data for this
     if(detail_data[channel] == undefined) {
       // No data, thus need to fetch
-      fetchData(channel, {include_time: time}, time, display_cb);
+      fetchData(channel, {include_time: time}, time, display_cb, extractor);
     } else {
+      // If it exists already, just call the callback
+      var index = indexOfTime(detail_data[channel], time);
+      var last_known_time = getLastDataTime(channel);
+
       // Check if there has been no new data for a while
       // because then we should not request more
       // This may be better handled differently once we have a
       // better idea of the architecture
-      if(detail_data[channel].consecutive_empty_fetches > max_empty_requests) {
+      if(detail_data[channel].consecutive_empty_fetches > max_empty_requests && time > last_known_time) {
         return false;
       }
 
       // We have some, but need to check if we have it for this time
-
-      // If it exists already, just call the callback
-      var index = indexOfTime(detail_data[channel], time);
       if(isDisplayableIndex(detail_data[channel], index)) {
         // Then we have the data
-        display_cb(getDetailData(detail_data[channel], index));
+        display_cb(extractor(detail_data[channel], index));
       } else {
         // Fetch data
+        var start_time = last_known_time;
         var params = {
-          include_time: time,
-          start_time: getLastDataTime(channel),
-          exclude_start: 'True'
+          include_time: time
         };
 
-        fetchData(channel, params, time, display_cb);
+        if(start_time < time) {
+          params.start_time = start_time;
+          params.exclude_start = 'True';
+        }
+
+        fetchData(channel, params, time, display_cb, extractor);
       }
     }
   }
@@ -76,14 +89,14 @@
   function getLastDataTime(channel) {
     var info = detail_data[channel];
 
-    return (info.values.length * info.time_span) + info.time_start;
+    return ((info.values.length - 1) * info.time_span) + info.time_start;
   }
 
-  function fetchData(channel, params, time, display_cb) {
-    $.get('/data/' + channel, params, makeDetailDataHandler(channel, time, display_cb), 'json');
+  function fetchData(channel, params, time, display_cb, extractor) {
+    $.get('/data/' + channel, params, makeDetailDataHandler(channel, time, display_cb, extractor), 'json');
   }
 
-  function makeDetailDataHandler(channel, time, display_cb) {
+  function makeDetailDataHandler(channel, time, display_cb, extractor) {
     return function(data) {
       if(data.status == 'ERROR') {
         return false;
@@ -134,7 +147,7 @@
 
       if(isDisplayableIndex(detail_data[channel], index)) {
         // Then we have the data
-        display_cb(getDetailData(detail_data[channel], index));
+        display_cb(extractor(detail_data[channel], index));
       } // Else there is no data for the channel
     };
   }
@@ -165,6 +178,12 @@
     return {
       columns: cols
     };
+  }
+
+  // Helper function to get a single datum at the given index
+  // Assumes this is a displayable index
+  function getDetailDatum(info, index) {
+    return info.values[index];
   }
 
   // Helper function to calculate the index for a given time
