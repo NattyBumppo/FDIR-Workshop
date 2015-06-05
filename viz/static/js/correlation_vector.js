@@ -11,7 +11,12 @@
   }
 
   correlation.setChannel = function(channel_name) {
+    var is_changed = channel == channel_name;
     channel = channel_name;
+
+    if(is_changed) {
+      correlation.display();
+    }
   }
 
   correlation.display = function(time) {

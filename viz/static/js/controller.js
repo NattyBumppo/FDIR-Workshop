@@ -5,6 +5,12 @@
 (function(controller, $, undefined) {
   $(document).ready(initAll);
 
+  // Sets focus on a specific channel
+  controller.focus = function(channel) {
+    correlation_vector.setChannel(channel);
+    graph_drawer.addGraph(channel);
+  }
+
   function initAll() {
     setupChannelTree();
     setupGraphs();
@@ -46,10 +52,7 @@
   function setupGraphs() {
     graph_drawer.bind('#detail_graphs');
 
-    graph_drawer.addGraph('sample_1');
-    graph_drawer.addGraph('sample_2');
-
-    timer.registerUpdater(graph_drawer.updateGraphs, 1000);// Probably will move this into graph_drawer
+    timer.registerUpdater(graph_drawer.updateGraphs, 1000);
   }
 
   function setupCorrelationVector() {

@@ -139,6 +139,7 @@
 
   // Toggle an individual node
   function toggle(d) {
+    console.log(d);
     if(d.children) {
       d._children = d.children;
       d.children = null;
@@ -179,6 +180,12 @@
       function(d) {
         toggle(d);
         update(d);
+
+        // Will want to set a class here that we can target
+        // to highlight the node
+        if(d.id_name) {
+          controller.focus(d.id_name);
+        }
       }
     );
 

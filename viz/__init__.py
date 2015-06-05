@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 # Later we will want to pull this from a file, or autogenerate,
 # but this prevents arbitrary file access by whitelisting channels
-valid_channels = set(['sample_1', 'sample_2', 'twice_sample_2', 'negative_correlation_sample_2'])
+valid_channels = None
 
 batch_size = 12
 pre_frame_size = 3 # This is the amount before the 'time' to look for correlation
@@ -113,7 +113,7 @@ def correlation_vector(channel):
     # Now read in the appropriate channel slices
     channel_values = {}
     channel_names = {}
-    for channel_name in valid_channels:
+    for channel_name in get_valid_channels():
         with open(relative_path('data/' + channel_name + '.json')) as channel_file:
             info = json.load(channel_file)
             channel_values[channel_name] = info['values'][start_index:end_index]
@@ -164,7 +164,7 @@ def correlation_matrix():
     time = int(float(time))
 
     # First read in a random channel
-    with open(relative_path('data/' + next(iter(valid_channels)) + '.json')) as channel_file:
+    with open(relative_path('data/' + next(iter(get_valid_channels())) + '.json')) as channel_file:
         general_info = json.load(channel_file)
 
     # Determine starting and ending indices of the slices
@@ -185,7 +185,7 @@ def correlation_matrix():
     # We continue by reading in all the data files
     channel_values = {}
     channel_names = {}
-    for channel_name in valid_channels:
+    for channel_name in get_valid_channels():
         with open(relative_path('data/' + channel_name + '.json')) as channel_file:
             info = json.load(channel_file)
             channel_values[channel_name] = info['values'][start_index:end_index]
@@ -208,9 +208,7 @@ def correlation_matrix():
 # Below are helper methods
 
 def is_valid_channel(channel):
-  global valid_channels
-
-  return channel in valid_channels
+  return channel in get_valid_channels()
 
 def calculate_index(info, time):
     return int(ceil((time - info['time_start']) * 1.0 / info['time_span']))
@@ -220,6 +218,16 @@ def json_error(msg):
 
 def relative_path(path):
     return os.path.join(os.path.dirname(__file__), path)
+
+def get_valid_channels():
+    global valid_channels
+
+    if valid_channels is None:
+        valid_channels = set(
+            [name for name, ext in [os.path.splitext(filename) for filename in os.listdir(relative_path('data/'))] if ext == '.json']
+        )
+
+    return valid_channels
 
 if __name__ == '__main__':
     app.run(debug=True)
