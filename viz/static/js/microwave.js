@@ -1,6 +1,5 @@
 (function(microwave, $, undefined) {
 
-
   // Setup variables
   // var microwave_area;
   var width;
@@ -15,15 +14,7 @@
   // Describes whether a fault has occurred
   var isFaulted;
 
-
-  // x will set a range marker from 0 to width
-  // z sets the domain to [0, 4]
-  // c makes a range of 10 colored categories
-  // var x;
-  // var z = d3.scale.linear().domain([0, 1]).clamp(true);
-  // var c = d3.scale.category10().domain(d3.range(10));
-
-  var margin = {top: 80, right: 0, bottom: 10, left: 80};
+  // var margin = {top: 80, right: 0, bottom: 10, left: 80};
   // var margin = {top: 100, right: 0, bottom: 10, left: 100}
 
   microwave.bind = function(selector)
@@ -33,22 +24,16 @@
 
   microwave.setup = function(w, h)
   {
-    console.log('setting up');
     width = w;
     height = h;
     // x = d3.scale.ordinal().rangeBands([0, width]);
     isFaulted = false;
-
-
-    // var timeWindow = $(document.createElement('div'));
-    // timeWindow.id = 'timeWindow';    
 
     // Add status LED (don't set image to make visible yet)
     var image = document.createElement('img');
     image.id = 'status_led';
     var microwaveEl = document.getElementById('microwave');
     microwaveEl.appendChild(image);
-
 
     // Get time
 
@@ -80,8 +65,6 @@
     microwave_area.empty();
   }
 
-
-
   updateViewWindowChannelValues = function(time)
   {
     // Update viewWindowChannelMap
@@ -94,11 +77,6 @@
 
   updateViewWindowChannelValue = function(data)
   {
-    // console.log('LOGGGING');
-    // console.log('========================');
-    // console.log(data);
-    // console.log('========================');
-
     var channelName = data.columns[0][0];
     var channelValue = data.columns[0][1];
     viewWindowChannelMap[channelName] = channelValue;
@@ -118,7 +96,6 @@
     // drawStatusLED();
     drawFaultInfo();
   }
-
 
   function drawTime()
   {
