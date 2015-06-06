@@ -139,7 +139,6 @@
 
   // Toggle an individual node
   function toggle(d) {
-    console.log(d);
     if(d.children) {
       d._children = d.children;
       d.children = null;

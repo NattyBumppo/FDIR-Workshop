@@ -16,6 +16,14 @@
     return detail_data;
   }
 
+  data_store.getFaults = function(time, fault_cb) {
+    var params = {
+      time: time
+    };
+
+    $.get('/get_faults', params, makeFaultHandler(fault_cb), 'json');
+  }
+
   data_store.getData = function(channel, time, display_cb) {
     proxyDataRequest(channel, time, display_cb, getDetailData);
   }
@@ -209,6 +217,16 @@
         display_cb(data);
       }
     };
+  }
+
+  // Wrapper for the fault callback
+  function makeFaultHandler(fault_cb) {
+    return function(data) {
+      if(data.status == 'SUCCESS' && data.faults.length > 0) {
+        // We have faults
+        fault_cb(data.faults);
+      }
+    }
   }
 
 }(window.data_store = window.data_store || {}, jQuery));

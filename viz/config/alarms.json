@@ -1,0 +1,20 @@
+{
+    "alarms": [
+        {
+        "name": "High motor voltage",
+        "triggers": [
+            "c['left_motor_voltage'][i] > 10.0",
+            "c['right_motor_voltage'][i] > 10.0"
+        ]},
+        {
+        "name": "Overacceleration",
+        "triggers": [
+            "mean(c['x_acceleration'][i] + c['y_acceleration'][i] + c['z_acceleration'][i]) > 5.0"
+        ]},
+        {
+        "name": "Bad health",
+        "triggers": [
+            "mean(lastn(c['internal_health_metric'], i, 3)) < 50.0"
+        ]}
+    ]
+}

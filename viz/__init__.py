@@ -5,6 +5,8 @@ import imp
 import os
 from correlator import correlator
 
+from fault_detector import fault_detector
+
 # Create Flask app
 app = Flask(__name__)
 
@@ -19,6 +21,34 @@ post_frame_size = 3 # This is the time after, thus a size of pre + post + 1
 @app.route('/')
 def display_main():
     return render_template('index.html')
+
+@app.route('/get_faults')
+def get_faults():
+    time = request.args.get('time', None)
+    time_step = 1000 # Setting this explicitly for now...
+
+    if time is None:
+        return json_error('time must be specified.')
+
+    time = int(float(time))
+
+    channel_values = {}
+    for channel_name in get_valid_channels():
+        with open(relative_path('data/' + channel_name + '.json')) as channel_file:
+            info = json.load(channel_file)
+            time_index = calculate_index(info, time)
+            channel_values[channel_name] = [info['values'][time_index]]
+
+    alarm_data = fault_detector.get_alarm_data(relative_path('config/alarms.json'))
+
+    faults = fault_detector.get_faults(channel_values, time, time_step, alarm_data)
+
+    return json.dumps(
+        {
+            'status': 'SUCCESS',
+            'faults': faults
+        }
+    )
 
 # This route will return json, containing all the values
 # known for that channel within the time_range
