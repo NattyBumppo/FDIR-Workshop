@@ -1,0 +1,213 @@
+.microwave {
+    position:relative;
+    width:70%;
+    height:70%;
+    max-width:960px;
+    min-width:400px;
+    min-height:600px;
+    margin: 30px auto 0 auto;
+    padding:3%;
+}
+
+.microwave h1{
+    text-align: center;
+    text-transform: uppercase;
+    margin:30px;
+    padding:0;
+    color: #cc7713;
+}
+
+.content {
+    position:relative;
+    width:70%;
+    margin:3px auto 0 auto;
+    min-width:300px;
+
+}
+
+.content ul{
+    margin:0;
+    padding:0;
+    list-style: none;
+    border:5px solid #CCC;
+    background: rgba(40,40,40,0.75);
+}
+.content ul li{
+    position: relative;
+    color:#FFF;
+    font-family: helvetica;
+    padding:2% 5%;
+    border-bottom: 1px solid #555;
+}
+
+.content ul li:last-child{
+    border-bottom:none;
+}
+
+.name{
+    font-weight:bold;
+}
+.count{
+    display:inline-block;
+    float:right;
+    color:#F00;
+    font-weight:bold;
+}
+.count:after{
+    content:' Likes';
+    color:#CCC;
+    font-size:80%;
+    font-weight:normal;
+}
+
+
+.content ul{
+    border-radius: 20px;
+}
+
+.animate {
+    -moz-animation: flashIt 0.2s ease 1;
+    -webkit-animation: flashIt 0.2s ease 1;
+    animation: flashIt 0.2s ease 1;
+}
+
+.animate .countold{
+    -moz-animation: spinIt 0.3s ease 1;
+    -webkit-animation: spinIt 0.3s ease 1;
+    animation: spinIt 0.3s ease 1;
+}
+
+
+@-moz-keyframes flashIt {
+    100% { opacity: 0; background-color: #FFF;}
+}
+@-webkit-keyframes flashIt {
+    100% { opacity: 0; background-color: #FFF;}
+}
+@keyframes flashIt {
+    100% { opacity: 0; }
+}
+
+@-moz-keyframes spinIt {
+    20% {-moz-transform: rotate(-10deg)}
+    40% {-moz-transform: rotate(10deg)}
+    60% {-moz-transform: rotate(-10deg)}
+    80% {-moz-transform: rotate(10deg)}
+    100% {-moz-transform: rotate(-10deg)}
+}
+@-webkit-keyframes spinIt {
+    20% {-webkit-transform: rotate(-10deg)}
+    40% {-webkit-transform: rotate(10deg)}
+    60% {-webkit-transform: rotate(-10deg)}
+    80% {-webkit-transform: rotate(10deg)}
+    100% {-webkit-transform: rotate(-10deg)}
+}
+@keyframes spinIt {
+     20% {transform: rotate(-10deg)}
+     40% {transform: rotate(10deg)}
+     60% {transform: rotate(-10deg)}
+     80% {transform: rotate(10deg)}
+     100% {transform: rotate(-10deg)}
+ }
+
+.microwave_title{
+    color:orange;
+    line-height:25px;
+    font-weight:bold;
+    font-size:13px;
+    font-family:arial;
+    border-radius:6px 6px 6px 6px; 
+    -webkit-border-radius:6px 6px 6px 6px;  
+    -moz-border-radius:6px 6px 6px 6px; 
+    width:100%;
+    background-color:#52463b;
+    text-align:center;
+    vertical-align:middle;      
+}
+
+.microwave_div {
+    background-color:#2d251d;
+    border:1px solid #cccccc;
+    -webkit-border-radius:20px; 
+    -moz-border-radius:20px; 
+    border-radius:20px;
+    padding:20px;
+    width:500px;
+    min-height:330px;
+    max-height:330px;
+    color:white;
+    line-height:30px;
+    display:inline-block;
+    vertical-align: top;
+    margin:0 28px;
+    position:relative;
+}
+
+.left_fault_info{
+    box-sizing:border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    -webkit-box-sizing:border-box; /* Safari */
+    width:60%;
+    font-size:12px;
+    text-indent:10px;
+    display:inline-block;
+    vertical-align: top;
+    float: left;
+    background-color:#404040;
+    height: 260;
+    padding-left: 20px;
+}
+
+.middle_channel_readings{
+    width:20%;
+    text-align:center;
+    font-size:12px;
+    display:inline-block;
+    vertical-align: middle;
+    float: center;
+    background-color:#404040;
+    font-size: 10px;
+}
+
+.right_channel_readings{
+    width:20%;
+    text-align:center;
+    display:inline-block;
+    vertical-align: top;
+    font-size:12px;
+    float: right;
+    background-color:#404040;
+    font-size: 10px;
+}
+
+.status_led{
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+
+.channel_value_display{
+    background-color:#404040;
+}
+
+.channel_name_display{
+    clear: both;
+    
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.time_area{
+    position: relative;
+    bottom: 10px;
+    right: 10px;
+    float: right;
+    font-weight: bold;
+}
+
+input[type=text]{
+    vertical-align: middle;
+    line-height: 100%;
+    width:80%;
+    text-align: center;
+}

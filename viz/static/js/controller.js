@@ -17,6 +17,7 @@
     setupCorrelationVector();
     setupCorrelationMatrix();
     setupFaultDetection();
+    setupMicrowave();
 
     setupPauseControl();
 
@@ -68,5 +69,13 @@
 
     timer.registerUpdater(correlation_matrix.display, 10000);
   }
+
+  function setupMicrowave() {
+    microwave.bind('#microwave');
+    // microwave.setSize(720, 720);
+    microwave.setup(600, 600);
+    timer.registerUpdater(microwave.display, 1000);
+  }
+
 
 }(window.controller = window.controller || {}, jQuery));
