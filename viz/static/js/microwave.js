@@ -8,14 +8,11 @@
   // The channels that will be displayed (digitally)
   // in the view windows. These will eventually be obtained
   // dynamically from the UI but for now they're hard-coded.
-  var viewWindowChannelNames = ['left_motor_current_draw', 'right_motor_current_draw', 'cores_in_use', 'x_acceleration', 'y_acceleration', 'z_acceleration'];
+  var viewWindowChannelNames = ['left_motor_current_draw', 'cores_in_use', 'x_acceleration', 'y_acceleration', 'z_acceleration', 'x_rotation', 'y_rotation', 'z_rotation'];
   var viewWindowChannelMap = {};
 
   // Describes whether a fault has occurred
   var isFaulted;
-
-  // var margin = {top: 80, right: 0, bottom: 10, left: 80};
-  // var margin = {top: 100, right: 0, bottom: 10, left: 100}
 
   microwave.bind = function(selector)
   {
@@ -29,12 +26,6 @@
     // x = d3.scale.ordinal().rangeBands([0, width]);
     isFaulted = false;
 
-    // Add status LED (don't set image to make visible yet)
-    var image = document.createElement('img');
-    image.id = 'status_led';
-    var microwaveEl = document.getElementById('microwave');
-    microwaveEl.appendChild(image);
-
     // Get time
 
     // Update (initialize) viewWindowChannelMap
@@ -45,20 +36,8 @@
 
   microwave.display = function(time)
   {
-
-    draw_microwave();
-
-    // Get channels first (hard-coded at first)
-    // data_store.getMicrowaveData(channels);
-  }
-
-    // Callback function that handles displaying the results
-  function display_cb(data) {
-    // First update the values to display
-    updateViewWindowChannelValues();
-
-
-    draw_microwave(data);// May want to condense these, as this is currently unnecessary
+    updateViewWindowChannelValues(time);
+    draw_microwave(time);
   }
 
   microwave.hide = function() {
@@ -80,58 +59,49 @@
     var channelName = data.columns[0][0];
     var channelValue = data.columns[0][1];
     viewWindowChannelMap[channelName] = channelValue;
-
   }
 
   // This function draws the main "microwave" interface
-  function draw_microwave(data) {
-    // console.log(viewWindowChannels);
-
-    // Clear microwave windows for redraw
-    var microwaveEl = document.getElementById('microwave');
-    microwaveEl.innerHTML = '';
-
-    drawTime();
+  function draw_microwave(time) {
+    drawTime(time);
     drawViewWindows();
-    // drawStatusLED();
+    drawStatusLED();
     drawFaultInfo();
   }
 
-  function drawTime()
+  function drawTime(time)
   {
-    var microwaveEl = document.getElementById('microwave');
-    microwaveEl.innerHTML += '<strong>Time:</strong> ';
-    var time = timer.getTime();
-    microwaveEl.innerHTML += time + '<br>';
+    var timeDisplayElement = document.getElementById('time_display');
+    timeDisplayElement.innerHTML = time/1000.0 + " sec";
   }
 
   function drawViewWindows()
   {
-    var microwaveEl = document.getElementById('microwave');
-    microwaveEl.innerHTML += '<strong>Channels</strong><br>';
-
     for (var i = 0; i < Object.keys(viewWindowChannelMap).length; i++)
     {
       channelName = Object.keys(viewWindowChannelMap)[i];
       channelValue = viewWindowChannelMap[channelName];
-      var microwaveEl = document.getElementById('microwave');
-      microwaveEl.innerHTML += '<strong>' + channelName + '</strong>: ' + channelValue + '<br>';
+      var channelNameElement = document.getElementById('channelName' + i);
+      var channelValueElement = document.getElementById('channelValue' + i);
+      channelNameElement.innerHTML = channelName;
+      channelValueElement.value = channelValue;
     }
   }
 
+  // Switches the LED image depending on fault state
   function drawStatusLED()
   {
     if (isFaulted)
     {
       // Set LED to red
       image = document.getElementById('status_led');
-      image.src = 'static/data/images/red_light.png';
+      image.src = 'static/images/red_light_bordered.png';
     }
     else
     {
       // Set LED to green
       image = document.getElementById('status_led');
-      image.src = 'static/data/images/green_light.png';
+      image.src = 'static/images/green_light_bordered.png';
     }
   }
 
