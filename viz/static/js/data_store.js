@@ -8,7 +8,7 @@
   var detail_data = {};
 
   var correlation_data = {};
-  var display_size = 60; // Number of data points to show on the graph
+  var display_size = 180; // Number of data points to show on the graph
   var max_empty_requests = 5; // Max requests with empty results before stopping requesting
   var max_num_correlated = 20; // Max number of channels to show for correlation vector
 

@@ -41,6 +41,7 @@
 
 #detail_graph_display_area {
   width: 400px;
+  overflow: hidden;
 }
 
 #channel_tree_display_area, #cm_display_area, #cv_display_area {

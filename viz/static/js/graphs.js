@@ -40,6 +40,9 @@
               format: function(y) { return y.toFixed(2); }
             }
           }
+        },
+        point: {
+          r: 1
         }
       }
     );

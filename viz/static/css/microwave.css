@@ -1,10 +1,7 @@
 .microwave {
     position:relative;
-    width:70%;
-    height:70%;
-    max-width:960px;
-    min-width:400px;
-    min-height:600px;
+    width:400px;
+    height:500px;
     margin: 30px auto 0 auto;
     padding:3%;
 }
@@ -132,7 +129,7 @@
     -moz-border-radius:20px; 
     border-radius:20px;
     padding:20px;
-    width:500px;
+    width:400px;
     min-height:330px;
     max-height:330px;
     color:white;
@@ -154,7 +151,7 @@
     vertical-align: top;
     float: left;
     background-color:#404040;
-    height: 260;
+    height: 260px;
     padding-left: 20px;
 }
 
@@ -192,7 +189,6 @@
 
 .channel_name_display{
     clear: both;
-    
     overflow: hidden;
     white-space: nowrap;
 }
