@@ -7,7 +7,7 @@
   var vis;
   var node_map = {};
 
-  var margins = [20, 120, 20, 120];
+  var margins = [20, 120, 20, 120];// t r b l
   var diagonal = d3.svg.diagonal().projection(
     function(d) {
       return [d.y, d.x];

@@ -5,17 +5,19 @@
   var num_cols = 3;
   var col_divisions = 12; // Bootstrap setting
   var channel;
+  var positive_color = [255, 127, 14];
+  var negative_color = [31, 119, 180];
 
   correlation.bind = function(selector) {
     correlation_area = $(selector);
   }
 
   correlation.setChannel = function(channel_name) {
-    var is_changed = channel == channel_name;
+    var is_changed = (channel != channel_name);
     channel = channel_name;
 
     if(is_changed) {
-      correlation.display();
+      correlation.display(timer.getTime());
     }
   }
 
@@ -23,8 +25,9 @@
     // First reset everything, in case existing drawing
     correlation.clear();
 
-    // We may want to make this a callback controlled system for the display?
-    data_store.getCorrelated(channel, time, display_cb);
+    if(channel != undefined) {
+      data_store.getCorrelated(channel, time, display_cb);
+    }// else display helper message later
   }
 
   correlation.clear = function() {
@@ -60,7 +63,7 @@
 
     marker.addClass('correlation_marker');
 
-    var marker_color = (info.correlation >= 0) ? [211, 0, 0] : [0, 0, 211];
+    var marker_color = (info.correlation >= 0) ? positive_color : negative_color;
     marker.css('background', 'rgba(' + marker_color.join(', ') + ', ' + Math.abs(info.correlation) + ')');
 
     var label = $(document.createElement('div'));

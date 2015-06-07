@@ -58,14 +58,12 @@
   function setupCorrelationVector() {
     correlation_vector.bind('#correlation_vector');
 
-    correlation_vector.setChannel('sample_1');
-
     timer.registerUpdater(correlation_vector.display, 10000);
   }
 
   function setupCorrelationMatrix() {
     correlation_matrix.bind('#correlation_matrix');
-    correlation_matrix.setSize(720, 720);
+    correlation_matrix.setSize(400, 400);
 
     timer.registerUpdater(correlation_matrix.display, 10000);
   }

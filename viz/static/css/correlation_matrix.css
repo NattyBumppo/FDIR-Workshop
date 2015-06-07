@@ -2,10 +2,14 @@
   fill: #EEE;
 }
 
-line {
+#correlation_matrix line {
   stroke: #FFF;
 }
 
-text.active {
+#correlation_matrix text.active {
   fill: #F00;
+}
+
+#correlation_matrix text {
+  font-size: 12px;
 }

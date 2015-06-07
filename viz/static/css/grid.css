@@ -1,7 +1,48 @@
-.graph-container {
-  outline: solid 1px #000;
+#display_area {
+  width: 1200px;
+  margin: 0px;
+  padding: 0px;
 }
 
-.graph-plot {
-  outline: solid 1px #F00;
+#display_area div {
+  margin: 0px;
+  padding: 0px;
+}
+
+#overview_display_area {
+  width: 800px;
+  float: left;
+}
+
+#channel_tree_display_area {
+  width: 800px;
+  height: 500px;
+}
+
+#correlation_display_area {
+  width: 800px;
+}
+
+#cm_display_area {
+  width: 400px;
+  float: left;
+  overflow-x: hidden;
+}
+
+#cv_display_area {
+  width: 400px;
+  overflow-x: hidden;
+}
+
+#mw_display_area {
+  width: 400px;
+  height: 500px;
+}
+
+#detail_graph_display_area {
+  width: 400px;
+}
+
+#channel_tree_display_area, #cm_display_area, #cv_display_area {
+  outline: #777 1px solid;
 }

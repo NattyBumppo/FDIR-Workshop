@@ -11,7 +11,7 @@
   var z = d3.scale.linear().domain([0, 1]).clamp(true);
   var c = d3.scale.category10().domain(d3.range(10));
 
-  var margin = {top: 80, right: 0, bottom: 10, left: 80}
+  //var margin = {top: 80, right: 0, bottom: 10, left: 80}
   var margin = {top: 100, right: 0, bottom: 10, left: 100}
 
   correlation.bind = function(selector) {
@@ -19,8 +19,8 @@
   }
 
   correlation.setSize = function(w, h) {
-    width = w;
-    height = h;
+    width = w - margin.left - margin.right;
+    height = h - margin.top - margin.bottom;
     x = d3.scale.ordinal().rangeBands([0, width]);
   }
 
@@ -51,12 +51,6 @@
       {
         'width': width + margin.left + margin.right,
         'height': height + margin.top + margin.bottom
-      }
-    );
-
-    svg.style(
-      {
-        'margin-left': -margin.left + 'px'
       }
     );
 

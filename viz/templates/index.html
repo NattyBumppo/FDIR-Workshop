@@ -81,87 +81,126 @@
           Pause
         </button>
       </div>
-      <div class="row">
-        <div class="col-md-12" id="channel_tree">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6" id="detail_graphs">
-        </div>
-        <div class="col-md-6" id="correlation_vector">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12" id="correlation_matrix">
-        </div>
-      </div>
-      <div class="row">
-        </div>
-      </div>      
 
-
-
-          <div class="microwave_div" style="height:200px;">
-              <img class="status_led" id="status_led" src="{{ url_for('static', filename='images/green_light_bordered.png') }}">          
-              <h4 class="microwave_title" id="microwave_title">Monitoring Panel</h4>
-
+      <div id="display_area">
+        <div id="overview_display_area">
+          <div id="channel_tree_display_area">
+            <div id="channel_tree">
+              <!-- Channel Tree goes here -->
+            </div>
+          </div>
+          <div id="correlation_display_area">
+            <div id="cm_display_area">
+              <div id="correlation_matrix">
+                <!-- Correlation Matrix goes here -->
+              </div>
+            </div>
+            <div id="cv_display_area">
+              <div id="correlation_vector">
+                <!-- Correlation Vector goes here -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="specific_display_area">
+          <div class="mw_display_area">
+            <!-- Microwave goes here -->
+            <div class="microwave_div" style="height:200px;">
+              <img class="status_led" id="status_led" src="{{ url_for('static', filename='images/green_light_bordered.png') }}" />
+              <h4 class="microwave_title" id="microwave_title">
+                Monitoring Panel
+              </h4>
 
               <div style="padding-top:10px;">
-                  <div class="left_fault_info" >
-                      <div class="fault_name" id="fault_name">Fault Name</div>
-                      <div class="fault_description" id="fault_description">Fault Description</div>
-                      <div class="fault_causes" id="fault_causes">
-                          <ul>
-                              <li>Some cause</li>
-                              <li>Some less plausible cause</li>
-                              <li>Yet another possible cause</li>
-                              <li>Some out-there crackpot theory</li>
-                          </ul>
+                <div class="left_fault_info" >
+                  <div class="fault_name" id="fault_name">
+                    Fault Name
+                  </div>
+                  <div class="fault_description" id="fault_description">
+                    Fault Description
+                  </div>
+                  <div class="fault_causes" id="fault_causes">
+                    <ul>
+                      <li>
+                        Some cause
+                      </li>
+                      <li>
+                        Some less plausible cause
+                      </li>
+                      <li>
+                        Yet another possible cause
+                      </li>
+                      <li>
+                        Some out-there crackpot theory
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="time_area"><strong>Current Time</strong></br>
+                    <div id="time_display">
+                    </div>
+                  </div>
+                </div>
+                <div class="middle_channel_readings" id="middle_channel_readings">
+                  <div class="channel_name_display" id="channelName0">
+                    <br />
+                  </div>
 
-                      </div>
-                      <div class="time_area"><strong>Current Time</strong></br>
-                        <div id="time_display">
-                        </div>
-                      </div>
+                  <input type="text" class="channel_value_display" id="channelValue0" value="1.0434" readonly />
+
+                  <div class="channel_name_display" id="channelName1">
+                    <br />
                   </div>
-                  <div class="middle_channel_readings" id="middle_channel_readings">
-                      <div class="channel_name_display" id="channelName0">
-                          <br></div>
-                          <input type="text" class="channel_value_display" id="channelValue0" value="1.0434" readonly>
-                      
-                      <div class="channel_name_display" id="channelName1">
-                          <br></div>
-                          <input type="text" class="channel_value_display" id="channelValue1" value="1.0434" readonly>
-                      
-                      <div class="channel_name_display" id="channelName2">
-                          <br></div>
-                          <input type="text" class="channel_value_display" id="channelValue2" value="1.0434" readonly>
-                      
-                      <div class="channel_name_display" id="channelName3">
-                          <br></div>
-                          <input type="text" class="channel_value_display" id="channelValue3" value="1.0434" readonly>
-                      
+
+                  <input type="text" class="channel_value_display" id="channelValue1" value="1.0434" readonly />
+
+                  <div class="channel_name_display" id="channelName2">
+                    <br />
                   </div>
-                  <div class="right_channel_readings" id="right_channel_readings">
-                      <div class="channel_name_display" id="channelName4">
-                          <br></div>
-                          <input type="text" class="channel_value_display" id="channelValue4" value="1.0434" readonly>
-                      
-                      <div class="channel_name_display" id="channelName5">
-                          <br></div>
-                          <input type="text" class="channel_value_display" id="channelValue5" value="1.0434" readonly>
-                      
-                      <div class="channel_name_display" id="channelName6">
-                          <br></div>
-                          <input type="text" class="channel_value_display" id="channelValue6" value="1.0434" readonly>
-                      
-                      <div class="channel_name_display" id="channelName7">
-                          <br></div>
-                          <input type="text" class="channel_value_display" id="channelValue7" value="1.0434" readonly>
-                      
+
+                  <input type="text" class="channel_value_display" id="channelValue2" value="1.0434" readonly />
+
+                  <div class="channel_name_display" id="channelName3">
+                    <br />
                   </div>
-              </div>
+
+                  <input type="text" class="channel_value_display" id="channelValue3" value="1.0434" readonly />
+                </div>
+                <div class="right_channel_readings" id="right_channel_readings">
+                  <div class="channel_name_display" id="channelName4">
+                    <br />
+                  </div>
+
+                  <input type="text" class="channel_value_display" id="channelValue4" value="1.0434" readonly />
+
+                  <div class="channel_name_display" id="channelName5">
+                    <br />
+                  </div>
+
+                  <input type="text" class="channel_value_display" id="channelValue5" value="1.0434" readonly />
+
+                  <div class="channel_name_display" id="channelName6">
+                    <br />
+                  </div>
+
+                  <input type="text" class="channel_value_display" id="channelValue6" value="1.0434" readonly />
+
+                  <div class="channel_name_display" id="channelName7">
+                    <br />
+                  </div>
+
+                  <input type="text" class="channel_value_display" id="channelValue7" value="1.0434" readonly />
+                </div>
+            </div>
+            <!-- End Microwave -->
           </div>
+          <div id="detail_graph_display_area">
+            <div id="detail_graphs">
+              <!-- Detail graphs go here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
 
   </body>
 </html>
