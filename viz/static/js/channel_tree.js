@@ -5,9 +5,10 @@
   var tree;
   var root;
   var vis;
+  var vis_group;
   var node_map = {};
 
-  var margins = [20, 120, 20, 120];// t r b l
+  var margins = [20, 60, 20, 60];// t r b l
   var diagonal = d3.svg.diagonal().projection(
     function(d) {
       return [d.y, d.x];
@@ -166,7 +167,7 @@
     );
 
     // Add a group to translate for margins
-    var vis_group = vis.append('g');
+    vis_group = vis.append('g');
     vis_group.attr(
       {
         transform: 'translate(' + margins[3] + ',' + margins[0] + ')'
@@ -214,7 +215,7 @@
       }
     );
 
-    var node = vis.selectAll('g.node').data(
+    var node = vis_group.selectAll('g.node').data(
       nodes,
       function(d) {
         return d.id || (d.id = ++counter);
@@ -312,7 +313,7 @@
 
     node_exit.select('text').style('fill-opacity', 1e-6);
 
-    var link = vis.selectAll('path.link').data(
+    var link = vis_group.selectAll('path.link').data(
       tree.links(nodes),
       function(d) {
         return d.target.id;
