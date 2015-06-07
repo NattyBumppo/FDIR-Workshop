@@ -76,11 +76,6 @@
       <h1>
         Telemetry Visualizer
       </h1>
-      <div id="pause_area">
-        <button type="button" id="pause_control">
-          Pause
-        </button>
-      </div>
 
       <div id="display_area">
         <div id="overview_display_area">
@@ -107,10 +102,21 @@
             <!-- Microwave goes here -->
             <div class="microwave_div" style="height:200px;">
               <img class="status_led" id="status_led" src="{{ url_for('static', filename='images/green_light_bordered.png') }}" />
+
               <h4 class="microwave_title" id="microwave_title">
                 Monitoring Panel
               </h4>
-
+              <div id="pause_and_time_area">
+                <div id="pause_area" class="pause_area">
+                  <button type="button" id="pause_control" class="pause_control">
+                    Pause
+                  </button>
+                </div>
+                <div class="time_area"><strong>Current Time</strong>: 
+                  <div id="time_display">
+                  </div>
+                </div>
+              </div>
               <div style="padding-top:10px;">
                 <div class="left_fault_info" >
                   <div class="fault_name" id="fault_name">
@@ -134,10 +140,6 @@
                         Some out-there crackpot theory
                       </li>
                     </ul>
-                  </div>
-                  <div class="time_area"><strong>Current Time</strong></br>
-                    <div id="time_display">
-                    </div>
                   </div>
                 </div>
                 <div class="middle_channel_readings" id="middle_channel_readings">

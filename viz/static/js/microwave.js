@@ -72,7 +72,7 @@
   function drawTime(time)
   {
     var timeDisplayElement = document.getElementById('time_display');
-    timeDisplayElement.innerHTML = time/1000.0 + " sec";
+    timeDisplayElement.innerHTML = (time/1000.0).toFixed(2) + " sec";
   }
 
   function drawViewWindows()
@@ -84,7 +84,7 @@
       var channelNameElement = document.getElementById('channelName' + i);
       var channelValueElement = document.getElementById('channelValue' + i);
       channelNameElement.innerHTML = channelName;
-      channelValueElement.value = channelValue;
+      channelValueElement.value = channelValue.toFixed(4);
     }
   }
 
