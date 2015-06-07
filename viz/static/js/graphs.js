@@ -34,6 +34,11 @@
             tick: {
               format: function(x) { return (x / 1000.0).toFixed(2); }
             }
+          },
+          y: {
+            tick: {
+              format: function(y) { return y.toFixed(2); }
+            }
           }
         }
       }
