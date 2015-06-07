@@ -58,7 +58,7 @@
     );
   }
 
-  channel_tree.display = function(time) {
+  channel_tree.display = function() {
     data_store.getChannels(display_cb);
   }
 

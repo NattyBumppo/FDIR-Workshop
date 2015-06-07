@@ -23,6 +23,12 @@
           x: 'x',
           columns: []
         },
+        transition: {
+          duration: 0
+        },
+        interaction: {
+          enabled: false
+        },
         axis: {
           x: {
             tick: {

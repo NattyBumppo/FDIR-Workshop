@@ -21,7 +21,7 @@
 
     setupPauseControl();
 
-    timer.start(1000);
+    timer.start(17);
   }
 
   function setupFaultDetection() {
@@ -31,7 +31,7 @@
   function setupChannelTree() {
     channel_tree.bind('#channel_tree');
     channel_tree.setup(800, 500);
-    channel_tree.display(5000);// Right now this time is ignored
+    channel_tree.display();// Right now this time is ignored
   }
 
   function setupPauseControl() {
@@ -52,7 +52,7 @@
   function setupGraphs() {
     graph_drawer.bind('#detail_graphs');
 
-    timer.registerUpdater(graph_drawer.updateGraphs, 1000);
+    timer.registerUpdater(graph_drawer.updateGraphs, 68);
   }
 
   function setupCorrelationVector() {
@@ -74,7 +74,7 @@
     microwave.bind('#microwave');
     // microwave.setSize(720, 720);
     microwave.setup(600, 600);
-    timer.registerUpdater(microwave.display, 1000);
+    timer.registerUpdater(microwave.display, 102);
   }
 
 

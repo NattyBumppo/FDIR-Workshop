@@ -14,9 +14,9 @@ app = Flask(__name__)
 # but this prevents arbitrary file access by whitelisting channels
 valid_channels = None
 
-batch_size = 12
-pre_frame_size = 3 # This is the amount before the 'time' to look for correlation
-post_frame_size = 3 # This is the time after, thus a size of pre + post + 1
+batch_size = 720
+pre_frame_size = 180 # This is the amount before the 'time' to look for correlation
+post_frame_size = 180 # This is the time after, thus a size of pre + post + 1
 
 @app.route('/')
 def display_main():
@@ -25,7 +25,7 @@ def display_main():
 @app.route('/get_faults')
 def get_faults():
     time = request.args.get('time', None)
-    time_step = 1000 # Setting this explicitly for now...
+    time_step = 17 # Setting this explicitly for now...
 
     if time is None:
         return json_error('time must be specified.')

@@ -73,8 +73,8 @@ def demo():
     channels = grab_channels('channels.json')
 
     time_start = 0
-    time_span = 1000
-    num_timesteps = 500
+    time_span = 17
+    num_timesteps = 30000
     directory_name = 'sim_data'
 
     print "Generating %s data values for %s channels, from time %s to %s." \
