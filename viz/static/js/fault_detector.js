@@ -16,7 +16,9 @@
         }
       } while(m);
 
-      matches.forEach(channel_tree.markFaulted);
+      for(var j=0;j<matches.length;j++) {
+        channel_tree.markFaulted(matches[j], faults[i]);
+      }
     }
   }
 

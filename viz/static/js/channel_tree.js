@@ -22,9 +22,13 @@
     tree_area = $(selector);
   }
 
-  channel_tree.markFaulted = function(node_name) {
+  channel_tree.markFaulted = function(node_name, info) {
     if(node_map[node_name]) {
       node_map[node_name].faulted = true;
+
+      node_map[node_name].fault_info = node_map[node_name].fault_info || []; // Should never be a false-y value
+
+      node_map[node_name].fault_info.push(info.name);
       redraw();
     }
   }
@@ -97,6 +101,56 @@
     } else {
       return node.faulted;
     }
+  }
+
+  // Gets a collected set of the fault information for a given node
+  // This includes deduping it
+  // Assumes the node is faulted. That can be checked with `is_node_faulted`
+  function get_fault_info(node) {
+    if(node.children || node._children) {
+      // Get fault info from children
+      var infos = (node.children || node._children).map(get_fault_info);
+
+      // Now we need to merge it
+      var merged_info = [];
+      for(var i=0;i<infos.length;i++) {
+        for(var j=0;j<infos[i].length;j++) {
+          if(merged_info.indexOf(infos[i][j]) == -1) {
+            // Then the name is not a duplicate
+            merged_info.push(infos[i][j]);
+          }
+        }
+      }
+
+      return merged_info;
+    } else {
+      return node.fault_info || [];
+    }
+  }
+
+  // Setup the tooltips for faulted elements
+  function setupTooltips(nodes) {
+    var elems = nodes[0];
+
+    nodes.each(
+      function(d, i) {
+        if(is_node_faulted(d)) {
+          $(this).qtip(
+            {
+              content: {
+                text: generateFaultText(d)
+              }
+            }
+          );
+        }
+      }
+    );
+  }
+
+  // Generates the html for a fault tooltip
+  function generateFaultText(node) {
+    var fault_info = get_fault_info(node);
+    return '<h4>Faults</h4><ul><li>' + fault_info.join('</li><li>') + '</li></ul>';
   }
 
   // This is modified code based somewhat on code from
@@ -219,6 +273,8 @@
       }
     ).style('fill-opacity', 1e-6);
 
+    setupTooltips(node_enter);
+
     var node_update = node.transition().duration(duration).attr(
       'transform',
       function(d) {
@@ -242,6 +298,8 @@
     );
 
     node_update.select('text').style('fill-opacity', 1);
+
+    setupTooltips(node_update);
 
     var node_exit = node.exit().transition().duration(duration).attr(
       'transform',
