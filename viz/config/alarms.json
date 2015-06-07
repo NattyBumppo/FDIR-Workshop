@@ -5,16 +5,22 @@
         "triggers": [
             "c['left_motor_voltage'][i] > 10.0",
             "c['right_motor_voltage'][i] > 10.0"
-        ]},
+        ],
+        "notes": "Could just be transient due to an electromagnetic field change; check value over time."
+        },
         {
         "name": "Overacceleration",
         "triggers": [
             "mean(c['x_acceleration'][i] + c['y_acceleration'][i] + c['z_acceleration'][i]) > 5.0"
-        ]},
+        ],
+        "notes": "Likely to happen during launch due to vibrations. Could be problem if happening during coast."
+        },
         {
         "name": "Bad health",
         "triggers": [
             "mean(lastn(c['internal_health_metric'], i, 3)) < 50.0"
-        ]}
+        ],
+        "notes": "Complex function of subsystem metrics; check various subsystems for off-nominal health."
+        }
     ]
 }
