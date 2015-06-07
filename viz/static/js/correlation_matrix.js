@@ -12,7 +12,7 @@
   var c = d3.scale.category10().domain(d3.range(10));
 
   //var margin = {top: 80, right: 0, bottom: 10, left: 80}
-  var margin = {top: 100, right: 0, bottom: 10, left: 100}
+  var margin = {top: 125, right: 10, bottom: 10, left: 125}
 
   correlation.bind = function(selector) {
     correlation_area = $(selector);
