@@ -176,7 +176,7 @@
     ).style(
       {
         'fill-opacity': function(d) {
-          return z(Math.abs(d.correlation));
+          return z(Math.pow(Math.abs(d.correlation),0.65));
         },
         'fill': function(d) {
           return (d.correlation >= 0) ? c(1) :  c(0);

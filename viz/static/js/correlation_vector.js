@@ -64,7 +64,7 @@
     marker.addClass('correlation_marker');
 
     var marker_color = (info.correlation >= 0) ? positive_color : negative_color;
-    marker.css('background', 'rgba(' + marker_color.join(', ') + ', ' + Math.abs(info.correlation) + ')');
+    marker.css('background', 'rgba(' + marker_color.join(', ') + ', ' + Math.pow(Math.abs(info.correlation),0.65) + ')');
 
     var label = $(document.createElement('div'));
 
