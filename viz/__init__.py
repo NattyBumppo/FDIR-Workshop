@@ -60,6 +60,12 @@ def fetch_data(channel):
     start_time = request.args.get('start_time', None)
     include_time = request.args.get('include_time', None)
     exclude_start = bool(request.args.get('exclude_start', False))
+    num_vals = request.args.get('num_vals', None)
+
+    # Load channel specific info
+    with open(relative_path('data/' + channel + '.json')) as channel_file:
+        info = json.load(channel_file)
+
 
     if include_time is None:
         return json_error('include_time is required')
@@ -67,15 +73,15 @@ def fetch_data(channel):
         include_time = int(float(include_time))
 
     if start_time is None:
-        start_time = include_time
+        if num_vals is not None:
+            start_time = max(0, include_time - (info['time_span'] * int(float(num_vals))))
+        else:
+            start_time = include_time
     else:
         start_time = int(float(start_time))
 
     if include_time < start_time:
         return json_error('include_time cannot be earlier than start_time')
-
-    with open(relative_path('data/' + channel + '.json')) as channel_file:
-        info = json.load(channel_file)
 
     # Determine start and include indices
     start_index = calculate_index(info, start_time)

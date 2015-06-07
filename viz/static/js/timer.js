@@ -3,6 +3,7 @@
   var interval;
   var delta;
   var time = 0;
+  var is_running = false;
 
   timer.registerUpdater = function(updater, span) {
     updaters.push(
@@ -15,14 +16,11 @@
   }
 
   timer.pause = function() {
-    if(interval) {
-      clearInterval(interval);
-      interval = undefined;
-    }
+    is_running = false;
   }
 
   timer.isRunning = function() {
-    return !!interval;// Explicit bool so as not to leak interval
+    return !!is_running;// Explicit bool so as not to leak interval
   }
 
   timer.setTime = function(new_time) {
@@ -42,16 +40,19 @@
     delta = span;
     time = -span;
 
-    timer.unpause();
-  }
-
-  timer.unpause = function() {
-    timer.pause();
+    is_running = true;
     interval = setInterval(handleUpdaters, delta);
   }
 
+  timer.unpause = function() {
+    is_running = true;
+  }
+
   function handleUpdaters() {
-    time += delta;
+    if(timer.isRunning()) {
+      time += delta;
+    }// Else do not want to move in time
+
     for(var i=0;i<updaters.length;i++) {
       updaters[i].elapsed += delta;
 

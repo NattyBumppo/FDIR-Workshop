@@ -25,6 +25,7 @@
 
 #cm_display_area {
   width: 400px;
+  height: 400px;
   float: left;
   overflow-x: hidden;
 }
