@@ -36,7 +36,12 @@
     // Check if there is any data for this
     if(detail_data[channel] == undefined) {
       // No data, thus need to fetch
-      fetchData(channel, {include_time: time}, time, display_cb, extractor);
+      var params = {
+        include_time: time,
+        num_vals: display_size
+      };
+
+      fetchData(channel, params, time, display_cb, extractor);
     } else {
       // If it exists already, just call the callback
       var index = indexOfTime(detail_data[channel], time);
