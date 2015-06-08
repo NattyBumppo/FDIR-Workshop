@@ -16,7 +16,7 @@ body {
   position: relative;
   background: #FFF;
   margin: 1px;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .detail_chart_container:nth-child(odd) {
