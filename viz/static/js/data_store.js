@@ -189,7 +189,15 @@
     cols[1].unshift('x');
 
     return {
-      columns: cols
+      config: {
+        y: {
+          min: info.mean - (2 * info.stddev),
+          max: info.mean + (2 * info.stddev)
+        }
+      },
+      data: {
+        columns: cols
+      }
     };
   }
 

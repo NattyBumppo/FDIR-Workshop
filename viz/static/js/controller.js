@@ -57,14 +57,14 @@
   function setupCorrelationVector() {
     correlation_vector.bind('#correlation_vector');
 
-    timer.registerUpdater(correlation_vector.display, 10000);
+    timer.registerUpdater(correlation_vector.display, 2000);
   }
 
   function setupCorrelationMatrix() {
     correlation_matrix.bind('#correlation_matrix');
     correlation_matrix.setSize(400, 400);
 
-    timer.registerUpdater(correlation_matrix.display, 10000);
+    timer.registerUpdater(correlation_matrix.display, 100);
   }
 
   function setupMicrowave() {

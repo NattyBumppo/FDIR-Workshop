@@ -37,7 +37,8 @@
         axis: {
           x: {
             tick: {
-              format: function(x) { return (x / 1000.0).toFixed(2); }
+              format: function(x) { return (x / 1000.0).toFixed(2); },
+              count: 10
             }
           },
           y: {
@@ -75,8 +76,11 @@
   }
 
   function generateDataCallback(chart) {
-    return function(data) {
-      chart.load(data);
+    return function(info) {
+      chart.load(info.data);
+
+      chart.axis.min(info.config.y.min);
+      chart.axis.max(info.config.y.max);
     }
   }
 
