@@ -35,6 +35,10 @@
   function proxyDataRequest(channel, time, display_cb, extractor) {
     // Check if there is any data for this
     if(detail_data[channel] == undefined) {
+      detail_data[channel] = {};
+    }
+
+    if(detail_data[channel].last_updated == undefined) {
       // No data, thus need to fetch
       var params = {
         include_time: time,
@@ -106,17 +110,27 @@
   }
 
   function fetchData(channel, params, time, display_cb, extractor) {
-    $.get('/data/' + channel, params, makeDetailDataHandler(channel, time, display_cb, extractor), 'json');
+    var cbs = detail_data[channel].cbs;
+    detail_data[channel].cb_func = makeDetailDataHandler(channel, time, display_cb, extractor);
+    if(cbs == undefined) {
+      detail_data[channel].cbs = cbs = $.Deferred();
+      detail_data[channel].req = $.get('/data/' + channel, params, makeDetailDataStorer(channel, time, display_cb, extractor), 'json');
+    }
+    //cbs.done(makeDetailDataHandler(channel, time, display_cb, extractor));
   }
 
-  function makeDetailDataHandler(channel, time, display_cb, extractor) {
+  function makeDetailDataStorer(channel, time) {// Time isn't necessary anymore, maybe
     return function(data) {
       if(data.status == 'ERROR') {
         return false;
       }
 
-      if(detail_data[channel] == undefined) {
+      if(detail_data[channel].last_updated == undefined) {
         // Need to add all the data
+        var cbs = detail_data[channel].cbs;
+        var cb_func = detail_data[channel].cb_func;
+        data.cbs = cbs;
+        data.cb_func = cb_func;
         detail_data[channel] = data;
 
         // This tracks to ensure requests are ignored if
@@ -131,25 +145,27 @@
       } else {
         // Just need to append, if this is the newest known request
         if(time > detail_data[channel].last_updated) {
+          detail_data[channel].last_updated = time;
           // Need to add on the values
           detail_data[channel].values = detail_data[channel].values.concat(data.values);
-
-          // We shouldn't need to worry about race conditions here
-          // I believe, because eventing of same origin stuff should
-          // be single thread. I'm not certain how this applies to
-          // AJAX, but will look further to make certain we're good.
-          detail_data[channel].last_updated = time;
 
           if(data.values.length == 0) {
             detail_data[channel].consecutive_empty_fetches++;
           } else {
             detail_data[channel].consecutive_empty_fetches = 0;
           }
-        } else {
-          return false; // Ignore because a newer and superseding request already arrived
         }
       }
 
+      //detail_data[channel].cbs.resolve();
+      detail_data[channel].cb_func();
+      detail_data[channel].cb_func = function() {}
+      detail_data[channel].cbs = undefined;
+    }
+  }
+
+  function makeDetailDataHandler(channel, time, display_cb, extractor) {
+    return function() {
       // Now we need to fire the callback
       // This could potentially be refactored with the original method
       // but putting it here for now. It does have a difference to
