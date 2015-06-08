@@ -118,7 +118,7 @@
     var fault_data = fault_detector.getCurrentFaults();
     var faults = Object.keys(fault_data);
 
-    for (var i = 0; i < faults.length; i++)
+    for (var i = faults.length-1; i >= 0; i--)
     {
       var name = fault_data[faults[i]]['name'];
       var trigger = fault_data[faults[i]]['trigger'];
