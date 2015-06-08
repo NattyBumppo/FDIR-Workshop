@@ -73,8 +73,7 @@
     else
     {
       return '';
-    }
-    
+    } 
   }
 
   function redraw() {
@@ -145,7 +144,6 @@
 
   // Setup the tooltips for faulted elements
   function setupTooltips(nodes) {
-    var elems = nodes[0];
 
     nodes.each(
       function(d, i) {
@@ -154,6 +152,12 @@
             {
               content: {
                 text: generateFaultText(d)
+              },
+              style: {
+                classes: 'qtip-red'
+              },
+              show: {
+                target: $(this)
               }
             }
           );
