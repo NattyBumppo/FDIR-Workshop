@@ -122,6 +122,7 @@
         // This tracks to ensure requests are ignored if
         // a newer one arrives first
         detail_data[channel].last_updated = time;
+        detail_data[channel].channel_name = channel;
 
         // This tracks to see when there is no more data
         // for the channel. Semi-hacky way of stopping
@@ -185,7 +186,8 @@
     );
 
     // Prepend column names
-    cols[0].unshift(info.display_name);
+    var units = channel_tree.getUnits(info.channel_name);
+    cols[0].unshift(info.display_name + ' (' + units + ')');
     cols[1].unshift('x');
 
     return {

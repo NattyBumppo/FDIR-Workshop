@@ -7,6 +7,7 @@ Styling
 -Add dark theme
 -Microwave scrollbar
 -c3 title hover interaction disable
+-correlation vector display_name in title
 
 Think On
 -Text input to find channels
@@ -39,6 +40,7 @@ Think On
 ----Moving around windows into the grid/relative positions, margins, etc.
 ----Minor pause button styling
 ----Padding on charts
+----add units to plot labels
 -Add tooltips for CM
 -Add tooltips for CV
 -Tooltip on top of text and bubble mid-space in DoI tree
