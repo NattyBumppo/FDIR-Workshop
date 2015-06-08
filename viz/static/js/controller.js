@@ -82,12 +82,14 @@
       {
         if (keyPressed(e, 102))
         {
-          var fault = [{"notes":"Could just be transient due to an electromagnetic field change; check value over time.","trigger":"c['left_motor_voltage'][i] > 10.0","name":"High motor voltage","time":2000}];
+          var time = timer.getTime();
+          var fault = [{"notes":"Could just be transient due to an electromagnetic field change; check value over time.","trigger":"c['left_motor_voltage'][i] > 10.0","name":"High motor voltage","time":time}];
           fault_detector.injectFault(fault);
         }
         else if (keyPressed(e, 103))
         {
-          var fault = [{"notes":"Likely to happen during launch due to vibrations. Could be problem if happening during coast.","trigger":"mean(c['x_acceleration'][i] + c['y_acceleration'][i] + c['z_acceleration'][i]) > 5.0","name":"Overacceleration","time":3000}];
+          var time = timer.getTime();
+          var fault = [{"notes":"Likely to happen during launch due to vibrations. Could be problem if happening during coast.","trigger":"mean(c['x_acceleration'][i] + c['y_acceleration'][i] + c['z_acceleration'][i]) > 5.0","name":"Overacceleration","time":time}];
           fault_detector.injectFault(fault);
         }
     });
