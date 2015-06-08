@@ -65,6 +65,7 @@
   overflow: auto;
   height: 40px;
   margin: 10px;
+  margin-bottom: 0px;
 }
 
 .pause_area {
@@ -142,7 +143,7 @@
     display: inline-block;
     vertical-align: top;
     float: left;
-    height: 260px;
+    height: 240px;
     padding: 0px 10px;
     overflow: scroll;
     line-height: normal;
@@ -213,4 +214,12 @@ input[type=text] {
 
 #fault_info_label {
   font-size: 15px;
+}
+
+#specific_display_area .microwave_div .fault_info_section {
+  padding-bottom: 1px;
+}
+
+#specific_display_area .microwave_div .fault_note_section {
+  padding-bottom: 8px;
 }

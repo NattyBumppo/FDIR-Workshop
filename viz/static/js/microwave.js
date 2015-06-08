@@ -118,15 +118,24 @@
     var fault_data = fault_detector.getCurrentFaults();
     var faults = Object.keys(fault_data);
 
+    var fault_info_label = $(document.createElement('h4'));
+    fault_info_label.attr('id', 'fault_info_label');
+    fault_info_label.text('Fault Information:');
+
+    $(fault_box).append(fault_info_label);
+
+    if(faults.length < 1) {
+      var fault_note = $(document.createElement('div'));
+      fault_note.attr('id', 'fault_note');
+      fault_note.text('No faults yet :)');
+      $(fault_box).append(fault_note);
+    }
+
     for (var i = faults.length-1; i >= 0; i--)
     {
       var name = fault_data[faults[i]]['name'];
       var trigger = fault_data[faults[i]]['trigger'];
       var notes = fault_data[faults[i]]['notes']
-
-      var fault_info_label = $(document.createElement('h4'));
-      fault_info_label.attr('id', 'fault_info_label');
-      fault_info_label.text('Fault Information:');
 
       var name_label = $(document.createElement('span'));
       name_label.addClass('mw_label');
@@ -152,20 +161,18 @@
       notes_info.addClass('mw_info');
       notes_info.text(notes);
 
-      $(fault_box).append(fault_info_label);
-
       var name_div = $(document.createElement("div"));
-      name_div.attr('id', 'fault_name');
+      name_div.addClass('fault_info_section');
       name_div.append(name_label, name_info);
       $(fault_box).append(name_div);
 
       var triggerDiv = $(document.createElement("div"));
-      triggerDiv.attr('id', 'fault_trigger');
+      triggerDiv.addClass('fault_info_section');
       triggerDiv.append(trigger_label, trigger_info);
       $(fault_box).append(triggerDiv);
 
       var notesDiv = $(document.createElement("div"));
-      notesDiv.attr('id', 'notes');
+      notesDiv.addClass('fault_note_section fault_info_section');
       notesDiv.append(notes_label, notes_info);
       $(fault_box).append(notesDiv);
     }
