@@ -187,7 +187,15 @@
 
     // Prepend column names
     var units = channel_tree.getUnits(info.channel_name);
-    cols[0].unshift(info.display_name + ' (' + units + ')');
+    if (units == '')
+    {
+      cols[0].unshift(info.display_name);
+    }
+    else
+    {
+      cols[0].unshift(info.display_name + ' (' + units + ')');
+    }
+    
     cols[1].unshift('x');
 
     return {
