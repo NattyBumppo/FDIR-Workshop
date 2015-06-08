@@ -1,0 +1,48 @@
+Functionality
+-Move to CSE 512 repo
+-look into response time order for graphs (jittering)
+-fix slowdown when loading multiple plots
+
+Styling
+-Add dark theme
+-Microwave scrollbar
+-c3 title hover interaction disable
+
+Think On
+-Text input to find channels
+-Ginormifying data set (simulated?)
+
+----Clicking channels in monitoring panel brings up corresponding plots
+----Different opacity scaling function for blocks
+----Fault trigger key
+----Limit plots to six (pop off the front)
+----Restyle plot close buttons
+----Switch DoI tree fault tooltip style
+----Adjust fonts/margins for CM
+----Move time somewhere more prominent on microwave
+----Move Pause thing
+----Fix redraw jump for CM
+----Fix flicker in correlation matrix/vector
+----Include units
+----Plot point radius smaller
+----Microwave sigfigs
+----Fixing (i.e., keeping constant) the y-axes for plots
+----Far left node move over to the right
+----deduping for faults
+----Function to de-dupe (i.e., not generate dupe) plots
+----Query for more data for plots when paused (so we don't show blank plots)
+----Default filler instructions for CV (before it's shown)
+----Function to remove plots
+----Plot placement (set widths)
+----Default filler instructions for plots (before they're shown)
+----time that fault occurred
+----Moving around windows into the grid/relative positions, margins, etc.
+----Minor pause button styling
+----Padding on charts
+-Add tooltips for CM
+-Add tooltips for CV
+-Tooltip on top of text and bubble mid-space in DoI tree
+-Plot lines different colors
+
+transcending css
+css zen garden (website)
