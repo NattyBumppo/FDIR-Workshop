@@ -39,15 +39,17 @@
   background: #FFF;
 }
 
-#mw_display_area {
+#display_area #specific_display_area #mw_display_area {
   width: 400px;
   background: #FFF;
   float: left;
+  margin-bottom: 10px;
 }
 
-#detail_graph_display_area {
+#display_area #specific_display_area #detail_graph_display_area {
   width: 400px;
   overflow-x: hidden;
+  padding-bottom: 10px;
 }
 
 .detail_chart_container {
