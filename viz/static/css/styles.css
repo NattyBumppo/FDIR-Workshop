@@ -12,7 +12,7 @@ body {
   font-size: 16px;
 }
 
-.detail_chart_container {
+#detail_graph_display_area div.detail_chart_container {
   position: relative;
   background: #FFF;
   margin-top: 10px;

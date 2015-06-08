@@ -78,7 +78,7 @@ def fetch_data(channel):
 
     if start_time is None:
         if num_vals is not None:
-            start_time = max(0, include_time - (info['time_span'] * int(float(num_vals))))
+            start_time = max(0, include_time - int(float(num_vals) / info['time_span']))
         else:
             start_time = include_time
     else:
