@@ -43,6 +43,12 @@
     var chart = c3.generate(
       {
         bindto: div[0],
+        padding: {
+          top: 5,
+          right: 10,
+          left: 50,
+          bottom: 5
+        },
         size: {
           width: 196,
           height: 165
