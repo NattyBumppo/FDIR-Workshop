@@ -26,8 +26,6 @@
     // x = d3.scale.ordinal().rangeBands([0, width]);
     isFaulted = false;
 
-    // Get time
-
     // Update (initialize) viewWindowChannelMap
     var time = timer.getTime();
     updateViewWindowChannelValues(time);
@@ -85,6 +83,14 @@
       var channelValueElement = document.getElementById('channelValue' + i);
       channelNameElement.innerHTML = channelName;
       channelValueElement.value = channelValue.toFixed(4);
+      // Also set div behavior (clicking on the value will cause the plot to appear)
+      channelValueElement.cursor = 'pointer';
+      channelValueElement.onclick = function() {
+        var id = this.id;
+        var index = id[id.length - 1];
+        var internalName = viewWindowChannelNames[index];
+        controller.focus(internalName);
+      };
     }
   }
 
