@@ -9,6 +9,11 @@
     return fault_list;
   }
 
+  fault_detector.injectFault = function(fault)
+  {
+    handleFaults(fault);
+  }
+
   function handleFaults(faults) {
     var channel_regex = /c\['([a-zA-Z_0-9]*)'\]/g;
     var highlight_channel;
