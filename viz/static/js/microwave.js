@@ -82,7 +82,8 @@
       var channelNameElement = document.getElementById('channelName' + i);
       var channelValueElement = document.getElementById('channelValue' + i);
       channelNameElement.innerHTML = channelName;
-      channelValueElement.value = channelValue.toFixed(4);
+      channelValueElement.value = channelValue.toFixed(4) + ' ' + channel_tree.getUnits(channelName);
+
       // Also set div behavior (clicking on the value will cause the plot to appear)
       channelValueElement.cursor = 'pointer';
       channelValueElement.onclick = function() {

@@ -108,7 +108,7 @@
                     "display_name": "X rotation",
                     "id_name": "x_rotation",
                     "type": "float",
-                    "units": "degrees",
+                    "units": "deg",
                     "mean": 0,
                     "stddev": 0.3
                 },
@@ -116,7 +116,7 @@
                     "display_name": "Y rotation",
                     "id_name": "y_rotation",
                     "type": "float",
-                    "units": "degrees",
+                    "units": "deg",
                     "mean": 0,
                     "stddev": 0.3
                 },
@@ -124,7 +124,7 @@
                     "display_name": "Z rotation",
                     "id_name": "z_rotation",
                     "type": "float",
-                    "units": "degrees",
+                    "units": "deg",
                     "mean": 0,
                     "stddev": 0.3
                 }

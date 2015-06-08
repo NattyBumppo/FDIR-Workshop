@@ -63,6 +63,20 @@
     data_store.getChannels(display_cb);
   }
 
+  channel_tree.getUnits = function(channel_id_name) 
+  {
+    var node = node_map[channel_id_name];
+    if (node['units'] != null)
+    {
+      return node['units'];
+    }
+    else
+    {
+      return '';
+    }
+    
+  }
+
   function redraw() {
     update(root);
   }
