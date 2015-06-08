@@ -11,9 +11,6 @@
   var viewWindowChannelNames = ['left_motor_current_draw', 'cores_in_use', 'x_acceleration', 'y_acceleration', 'z_acceleration', 'x_rotation', 'y_rotation', 'z_rotation'];
   var viewWindowChannelMap = {};
 
-  // Describes whether a fault has occurred
-  var isFaulted;
-
   microwave.bind = function(selector)
   {
     // microwave_area = $(selector);
@@ -24,7 +21,6 @@
     width = w;
     height = h;
     // x = d3.scale.ordinal().rangeBands([0, width]);
-    isFaulted = false;
 
     // Update (initialize) viewWindowChannelMap
     var time = timer.getTime();
@@ -98,17 +94,18 @@
   // Switches the LED image depending on fault state
   function drawStatusLED()
   {
-    if (isFaulted)
-    {
-      // Set LED to red
-      image = document.getElementById('status_led');
-      image.src = 'static/images/red_light_bordered.png';
-    }
-    else
+    // Check faulted state
+    var faultCount = Object.keys(fault_detector.getCurrentFaults()).length;
+    if (faultCount > 0)
     {
       // Set LED to green
       image = document.getElementById('status_led');
-      image.src = 'static/images/green_light_bordered.png';
+      image.src = 'static/images/red_light.png';
+    }
+    else
+    {
+      image = document.getElementById('status_led');
+      image.src = 'static/images/green_light.png';
     }
   }
 
