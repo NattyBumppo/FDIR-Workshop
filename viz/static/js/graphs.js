@@ -45,7 +45,7 @@
         bindto: div[0],
         size: {
           width: 196,
-          height: 150
+          height: 165
         },
         data: {
           empty: {

@@ -57,6 +57,7 @@ body {
 #specific_display_area #detail_graph_display_area .help_message_container {
   margin: 1px;
   background: #FFF;
+  margin-top: 5px;
 }
 
 #specific_display_area #detail_graph_display_area .help_message {

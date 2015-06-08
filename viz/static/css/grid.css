@@ -43,7 +43,7 @@
   width: 400px;
   background: #FFF;
   float: left;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 #display_area #specific_display_area #detail_graph_display_area {
@@ -54,7 +54,7 @@
 
 .detail_chart_container {
   width: 196px;
-  height: 150px;
+  height: 165px;
 }
 
 #channel_tree_display_area, #cm_display_area, #cv_display_area, .microwave_div, .detail_chart_container, .help_message_container {
