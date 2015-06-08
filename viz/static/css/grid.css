@@ -55,6 +55,6 @@
   height: 150px;
 }
 
-#channel_tree_display_area, #cm_display_area, #cv_display_area, .microwave_div, .detail_chart_container {
+#channel_tree_display_area, #cm_display_area, #cv_display_area, .microwave_div, .detail_chart_container, .help_message_container {
   outline: #777 1px solid;
 }

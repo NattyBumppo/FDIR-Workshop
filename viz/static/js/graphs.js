@@ -5,12 +5,16 @@
 
   graph.bind = function(selector) {
     graph_area = $(selector);
+
+    setupHelpMessage();
   }
 
   // This function creates a graph to be added to the document
   // channel: This is the channel to get data from
   //
   graph.addGraph = function(channel) {
+    removeHelpMessage();
+
     // Check if graph already exists
     if(graphs[channel] != undefined) {
       return false;
@@ -104,6 +108,10 @@
     chart.destroy(); // There was a race condition here... O.o Needs to still
                      // be looked into, to see if there is a guaranteed fix
     container.remove();
+
+    if(container.children().length < 1) {
+      setupHelpMessage();
+    }
   }
 
   function updateGraph(info, time) {
@@ -127,6 +135,28 @@
         chart.axis.max(info.config.y.max);
       }
     }
+  }
+
+  function setupHelpMessage() {
+    var message_container = $(document.createElement('div'));
+    message_container.addClass('help_message_container');
+
+    var message_title = $(document.createElement('h2'));
+    message_title.addClass('help_message_title');
+    message_title.text('Detail Graph Info');
+
+    var message = $(document.createElement('p'));
+    message.addClass('help_message');
+    message.text('Detail graphs will be shown here when a channel is selected. Select a channel via the tree hierarchy, or the data views in the monitor.');
+
+    message_container.append(message_title);
+    message_container.append(message);
+
+    graph_area.append(message_container);
+  }
+
+  function removeHelpMessage() {
+    graph_area.find('.help_message_container').remove();
   }
 
   // This function handles updating all the graphs

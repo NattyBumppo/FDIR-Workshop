@@ -52,3 +52,13 @@ body {
 #correlation_vector p {
   padding: 10px;
 }
+
+#specific_display_area #detail_graph_display_area .help_message_container {
+  margin: 1px;
+  background: #FFF;
+  margin-top: 10px;
+}
+
+#specific_display_area #detail_graph_display_area .help_message {
+  padding: 10px;
+}
