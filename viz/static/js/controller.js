@@ -53,7 +53,7 @@
   function setupGraphs() {
     graph_drawer.bind('#detail_graphs');
 
-    timer.registerUpdater(graph_drawer.updateGraphs, 68);
+    timer.registerUpdater(graph_drawer.updateGraphs, 100);
   }
 
   function setupCorrelationVector() {
