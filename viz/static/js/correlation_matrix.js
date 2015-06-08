@@ -4,6 +4,8 @@
   var width;
   var height;
 
+  var currentlySelectedCell;
+
   // x will set a range marker from 0 to width
   // z sets the domain to [0, 4]
   // c makes a range of 10 colored categories
@@ -161,6 +163,16 @@
       }
     );
 
+    // Draw selected cell row/column headers
+    if (currentlySelectedCell != null)
+    {
+      d3.selectAll('.cm-row text').classed('active', function(d, i) { return i == currentlySelectedCell.y; });
+      d3.selectAll('.cm-column text').classed('active', function(d, i) { return i == currentlySelectedCell.x; });
+    }
+    else
+    {
+      d3.selectAll('text').classed('active', false);
+    }
   }
 
   function setupRow(row) {
@@ -192,11 +204,13 @@
   }
 
   function cellMouseover(p) {
+    currentlySelectedCell = p;
     d3.selectAll('.cm-row text').classed('active', function(d, i) { return i == p.y; });
-    d3.selectAll('.cm-column text').classed('active', function(d, i) { return i == p.x; });
+    d3.selectAll('.cm-column text').classed('active', function(d, i) { return i == p.x; });    
   }
 
   function cellMouseout() {
+    currentlySelectedCell = null;
     d3.selectAll('text').classed('active', false);
   }
 
