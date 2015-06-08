@@ -25,21 +25,27 @@
   }
 
   correlation.display = function(time) {
-    // First reset everything, in case an existing
-    // matrix is already displayed
-    correlation.clear();
-
     data_store.getCorrelationMatrix(time, display_cb);
   }
 
   correlation.clear = function() {
+    // Before emptying, we want to save the height, to avoid a flicker
+    correlation_area.height(correlation_area.height());
+
     correlation_area.empty();
     nodes = undefined;
   }
 
   // Callback function that handles displaying the results
   function display_cb(data) {
-    draw_matrix(data);// May want to condense these, as this is currently unnecessary
+    // First reset everything, in case an existing
+    // matrix is already displayed
+    correlation.clear();
+
+    draw_matrix(data);
+
+    // Now clear the height
+    correlation_area.height('');
   }
 
   // This function draws the matrix. It is closely based on the sample

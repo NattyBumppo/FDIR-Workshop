@@ -22,20 +22,24 @@
   }
 
   correlation.display = function(time) {
-    // First reset everything, in case existing drawing
-    correlation.clear();
-
     if(channel != undefined) {
       data_store.getCorrelated(channel, time, display_cb);
     }// else display helper message later
   }
 
   correlation.clear = function() {
+    // Before emptying, we want to save the height, to avoid a flicker
+    correlation_area.height(correlation_area.height());
+
     correlation_area.empty();
   }
 
   // Callback function that handles displaying the results
   function display_cb(data) {
+    // First reset everything, in case existing drawing
+    correlation.clear();
+
+    $('#cv_channel_title').text(channel);
     var corr_vector = data.correlation_vector;
     for(var i=0;i<corr_vector.length;i++) {
       if(i % num_cols == 0) {
@@ -46,6 +50,9 @@
 
       correlation_area.children().last().append(createCorrelationTile(corr_vector[i]));
     }
+
+    // Now clear the height
+    correlation_area.height('');
   }
 
   // Helper function to handle creating a correlation tile
