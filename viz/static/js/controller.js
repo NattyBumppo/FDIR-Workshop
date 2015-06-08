@@ -20,6 +20,8 @@
     setupMicrowave();
     setupPauseControl();
 
+    setupDebugKeyListener();
+
     timer.start(17);
   }
 
@@ -74,5 +76,19 @@
     timer.registerUpdater(microwave.display, 102);
   }
 
+  function setupDebugKeyListener()
+  {
+    $(document).keypress(function(e)
+      {
+        var checkWebkitandIE=(e.which==102);
+        var checkMoz=(e.which==102);
+
+        if (checkWebkitandIE || checkMoz)
+        {
+          var fault = [{"notes":"Could just be transient due to an electromagnetic field change; check value over time.","trigger":"c['left_motor_voltage'][i] > 10.0","name":"High motor voltage","time":17527}];
+          fault_detector.injectFault(fault);
+        }
+    });
+  }
 
 }(window.controller = window.controller || {}, jQuery));
