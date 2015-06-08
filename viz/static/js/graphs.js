@@ -1,6 +1,6 @@
 (function(graph, $, c3, undefined) {
   // This will later be used when graphs change
-  var graphs = [];
+  var graphs = {};
   var graph_area;
 
   graph.bind = function(selector) {
@@ -11,6 +11,11 @@
   // channel: This is the channel to get data from
   //
   graph.addGraph = function(channel) {
+    // Check if graph already exists
+    if(graphs[channel] != undefined) {
+      return false;
+    }
+
     var div = $(document.createElement('div'));
     div.addClass('detail_chart');
 
@@ -47,18 +52,17 @@
       }
     );
 
-    graphs.push(
-      {
-        chart: chart,
-        channel: channel,
-        last_loaded: timer.getTime() - 1// Sometime in the 'past' to force update
-      }
-    );
+    graphs[channel] = {
+      chart: chart,
+      channel: channel,
+      last_loaded: timer.getTime() - 1,
+      container: div// Sometime in the 'past' to force update
+    };
   }
 
   graph.updateGraphs = function(time) {
-    for(var i=0;i<graphs.length;i++) {
-      updateGraph(graphs[i], time);
+    for(var channel in graphs) {
+      updateGraph(graphs[channel], time);
     }
   }
 
