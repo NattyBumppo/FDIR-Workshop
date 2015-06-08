@@ -1,7 +1,12 @@
 (function(fault_detector, $, undefined) {
+  var fault_list = {};
 
   fault_detector.getFaults = function(time) {
     data_store.getFaults(time, handleFaults);
+  }
+
+  fault_detector.getCurrentFaults = function() {
+    return fault_list;
   }
 
   function handleFaults(faults) {
@@ -20,6 +25,10 @@
       for(var j=0;j<matches.length;j++) {
         channel_tree.markFaulted(matches[j], faults[i]);
         highlight_channel = matches[j];
+      }
+
+      if(fault_list[faults[i].name] == undefined) {
+        fault_list[faults[i].name] = faults[i];
       }
     }
 

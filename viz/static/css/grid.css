@@ -1,5 +1,5 @@
 #display_area {
-  width: 1200px;
+  width: 1220px;
   margin: 0px;
   padding: 0px;
 }
@@ -10,39 +10,45 @@
 }
 
 #overview_display_area {
-  width: 800px;
+  width: 820px;
   float: left;
 }
 
-#channel_tree_display_area {
-  width: 800px;
+#overview_display_area #channel_tree_display_area {
+  width: 810px;
   height: 500px;
+  background: #FFF;
+  margin-bottom: 10px;
 }
 
 #correlation_display_area {
-  width: 800px;
+  width: 810px;
 }
 
-#cm_display_area {
+#correlation_display_area #cm_display_area {
   width: 400px;
-  height: 400px;
   float: left;
   overflow-x: hidden;
+  background: #FFF;
+  margin-right: 10px;
 }
 
 #cv_display_area {
   width: 400px;
   overflow-x: hidden;
+  background: #FFF;
 }
 
 #mw_display_area {
   width: 400px;
   height: 500px;
+  background: #FFF;
 }
 
 #detail_graph_display_area {
   width: 400px;
-  overflow: hidden;
+  overflow-x: hidden;
+  background: #FFF;
 }
 
 #channel_tree_display_area, #cm_display_area, #cv_display_area {
