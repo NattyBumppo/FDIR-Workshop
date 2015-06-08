@@ -48,9 +48,13 @@
 #detail_graph_display_area {
   width: 400px;
   overflow-x: hidden;
-  overflow-y: visible;
 }
 
-#channel_tree_display_area, #cm_display_area, #cv_display_area {
+.detail_chart_container {
+  width: 196px;
+  height: 150px;
+}
+
+#channel_tree_display_area, #cm_display_area, #cv_display_area, .detail_chart_container {
   outline: #777 1px solid;
 }

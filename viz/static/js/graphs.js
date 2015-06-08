@@ -16,12 +16,17 @@
       return false;
     }
 
+    // Check if already full. If so, delete the first graph
+    if(graph_area.children().length >= 6) {
+      graph_area.children().first().find('.chart_close_button').click();
+    }
+
     var container = $(document.createElement('div'));
     container.addClass('detail_chart_container');
 
     var x_button = $(document.createElement('a'));
     x_button.addClass('chart_close_button');
-    x_button.text('X');
+    x_button.html('&#10006;');
 
     var div = $(document.createElement('div'));
     div.addClass('detail_chart');
@@ -34,7 +39,16 @@
     var chart = c3.generate(
       {
         bindto: div[0],
+        size: {
+          width: 196,
+          height: 150
+        },
         data: {
+          empty: {
+            label: {
+              text: "Loading data..."
+            }
+          },
           x: 'x',
           columns: []
         },
@@ -81,7 +95,9 @@
     }
   }
 
-  function closeChart() {
+  function closeChart(e) {
+    e.preventDefault();
+
     var container = $(this).parent();
     var chart = graphs[container.data('channel')].chart;
     graphs[container.data('channel')] = undefined;
