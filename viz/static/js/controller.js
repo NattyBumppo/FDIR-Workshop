@@ -18,7 +18,6 @@
     setupCorrelationMatrix();
     setupFaultDetection();
     setupMicrowave();
-
     setupPauseControl();
 
     timer.start(17);

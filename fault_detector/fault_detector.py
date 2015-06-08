@@ -81,6 +81,7 @@ def get_faults(channel_samples, time_start, time_step, alarms):
                         fault = {}
                         fault['name'] = alarm['name']
                         fault['trigger'] = trigger
+                        fault['notes'] = alarm['notes']
                         fault['time'] = time_start + time_step * i
                         faults.append(fault)
                     else:

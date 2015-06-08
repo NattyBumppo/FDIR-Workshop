@@ -213,6 +213,7 @@
     background-color:#404040;
     height: 260px;
     padding-left: 20px;
+    overflow: scroll;
 }
 
 .middle_channel_readings{

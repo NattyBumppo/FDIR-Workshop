@@ -29,7 +29,6 @@
     // Update (initialize) viewWindowChannelMap
     var time = timer.getTime();
     updateViewWindowChannelValues(time);
-
   }
 
   microwave.display = function(time)
@@ -113,7 +112,34 @@
 
   function drawFaultInfo()
   {
+    // Draw the names, triggers, and descriptions for each fault
+    var fault_box = document.getElementById('left_fault_info');
+    fault_box.innerHTML = '';
 
+    var fault_data = fault_detector.getCurrentFaults();
+    var faults = Object.keys(fault_data);
+
+    for (var i = 0; i < faults.length; i++)
+    {
+      var name = fault_data[faults[i]]['name'];
+      var trigger = fault_data[faults[i]]['trigger'];
+      var notes = fault_data[faults[i]]['notes']
+
+      var name_div = document.createElement("div");
+      name_div.id = 'fault_name';
+      name_div.innerHTML = name;
+      fault_box.appendChild(name_div);
+
+      var triggerDiv = document.createElement("div");
+      triggerDiv.id = 'fault_trigger';
+      triggerDiv.innerHTML = trigger;
+      fault_box.appendChild(triggerDiv);
+
+      var notesDiv = document.createElement("div");
+      notesDiv.id = 'notes';
+      notesDiv.innerHTML = notes;
+      fault_box.appendChild(notesDiv);
+    }
   }
 
   function viewWindowMouseover(p)
