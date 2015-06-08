@@ -47,15 +47,16 @@
     for (var i = 0; i < viewWindowChannelNames.length; i++)
     {
       var channelName = viewWindowChannelNames[i];
-      data_store.getData(channelName, time, updateViewWindowChannelValue);
+      update_cb = makeUpdateWrapper(channelName);
+      data_store.getDatum(channelName, time, update_cb);
     }
   }
 
-  updateViewWindowChannelValue = function(data)
-  {
-    var channelName = data.columns[0][0];
-    var channelValue = data.columns[0][1];
-    viewWindowChannelMap[channelName] = channelValue;
+  function makeUpdateWrapper(channelName) {
+    return function(channelValue)
+    {
+      viewWindowChannelMap[channelName] = channelValue;
+    }
   }
 
   // This function draws the main "microwave" interface
