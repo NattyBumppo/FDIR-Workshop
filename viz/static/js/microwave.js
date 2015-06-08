@@ -134,12 +134,18 @@
     for (var i = faults.length-1; i >= 0; i--)
     {
       var name = fault_data[faults[i]]['name'];
+      var time = fault_data[faults[i]]['time'];
+      var time_formatted = (time/1000.0).toFixed(2) + " sec";
       var trigger = fault_data[faults[i]]['trigger'];
       var notes = fault_data[faults[i]]['notes']
 
       var name_label = $(document.createElement('span'));
       name_label.addClass('mw_label');
       name_label.text('Name: ');
+
+      var time_label = $(document.createElement('span'));
+      time_label.addClass('mw_label');
+      time_label.text('Time: ');
 
       var trigger_label = $(document.createElement('span'));
       trigger_label.addClass('mw_label');
@@ -153,6 +159,10 @@
       name_info.addClass('mw_info');
       name_info.text(name);
 
+      var time_info = $(document.createElement('span'));
+      time_info.addClass('mw_info');
+      time_info.text(time_formatted);
+
       var trigger_info = $(document.createElement('span'));
       trigger_info.addClass('mw_info');
       trigger_info.text(trigger);
@@ -165,6 +175,11 @@
       name_div.addClass('fault_info_section');
       name_div.append(name_label, name_info);
       $(fault_box).append(name_div);
+
+      var timeDiv = $(document.createElement("div"));
+      timeDiv.addClass('fault_info_section');
+      timeDiv.append(time_label, time_info);
+      $(fault_box).append(timeDiv);
 
       var triggerDiv = $(document.createElement("div"));
       triggerDiv.addClass('fault_info_section');
