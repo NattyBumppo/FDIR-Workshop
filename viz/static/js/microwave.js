@@ -124,20 +124,50 @@
       var trigger = fault_data[faults[i]]['trigger'];
       var notes = fault_data[faults[i]]['notes']
 
-      var name_div = document.createElement("div");
-      name_div.id = 'fault_name';
-      name_div.innerHTML = name;
-      fault_box.appendChild(name_div);
+      var fault_info_label = $(document.createElement('h4'));
+      fault_info_label.attr('id', 'fault_info_label');
+      fault_info_label.text('Fault Information:');
 
-      var triggerDiv = document.createElement("div");
-      triggerDiv.id = 'fault_trigger';
-      triggerDiv.innerHTML = trigger;
-      fault_box.appendChild(triggerDiv);
+      var name_label = $(document.createElement('span'));
+      name_label.addClass('mw_label');
+      name_label.text('Name: ');
 
-      var notesDiv = document.createElement("div");
-      notesDiv.id = 'notes';
-      notesDiv.innerHTML = notes;
-      fault_box.appendChild(notesDiv);
+      var trigger_label = $(document.createElement('span'));
+      trigger_label.addClass('mw_label');
+      trigger_label.text('Trigger: ');
+
+      var notes_label = $(document.createElement('span'));
+      notes_label.addClass('mw_label');
+      notes_label.text('Notes: ');
+
+      var name_info = $(document.createElement('span'));
+      name_info.addClass('mw_info');
+      name_info.text(name);
+
+      var trigger_info = $(document.createElement('span'));
+      trigger_info.addClass('mw_info');
+      trigger_info.text(trigger);
+
+      var notes_info = $(document.createElement('span'));
+      notes_info.addClass('mw_info');
+      notes_info.text(notes);
+
+      $(fault_box).append(fault_info_label);
+
+      var name_div = $(document.createElement("div"));
+      name_div.attr('id', 'fault_name');
+      name_div.append(name_label, name_info);
+      $(fault_box).append(name_div);
+
+      var triggerDiv = $(document.createElement("div"));
+      triggerDiv.attr('id', 'fault_trigger');
+      triggerDiv.append(trigger_label, trigger_info);
+      $(fault_box).append(triggerDiv);
+
+      var notesDiv = $(document.createElement("div"));
+      notesDiv.attr('id', 'notes');
+      notesDiv.append(notes_label, notes_info);
+      $(fault_box).append(notesDiv);
     }
   }
 

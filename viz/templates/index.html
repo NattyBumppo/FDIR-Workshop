@@ -110,27 +110,28 @@
             </div>
           </div>
         </div>
-        <div class="specific_display_area">
-          <div class="mw_display_area">
+        <div id="specific_display_area">
+          <div id="mw_display_area">
             <!-- Microwave goes here -->
             <div class="microwave_div" style="height:200px;">
-              <img class="status_led" id="status_led" />
-
-              <h4 class="microwave_title" id="microwave_title">
+              <h2 class="microwave_title" id="microwave_title">
                 Monitoring Panel
               </h4>
               <div id="pause_and_time_area">
+                <div id="status_icon">
+                  <img class="status_led" id="status_led" />
+                </div>
                 <div id="pause_area" class="pause_area">
                   <button type="button" id="pause_control" class="pause_control">
                     Pause
                   </button>
                 </div>
-                <div class="time_area"><strong>Current Time</strong>: 
+                <div class="time_area"><strong>Current Time</strong>:
                   <div id="time_display">
                   </div>
                 </div>
               </div>
-              <div style="padding-top:10px;">
+              <div>
                 <div class="left_fault_info" id="left_fault_info">
                 </div>
                 <div class="middle_channel_readings" id="middle_channel_readings">

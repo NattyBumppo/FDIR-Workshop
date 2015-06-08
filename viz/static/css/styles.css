@@ -48,3 +48,7 @@ body {
 .c3-legend-item-tile {
   display: none;
 }
+
+#correlation_vector p {
+  padding: 10px;
+}

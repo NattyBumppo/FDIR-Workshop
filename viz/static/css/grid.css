@@ -41,8 +41,8 @@
 
 #mw_display_area {
   width: 400px;
-  height: 500px;
   background: #FFF;
+  float: left;
 }
 
 #detail_graph_display_area {
@@ -55,6 +55,6 @@
   height: 150px;
 }
 
-#channel_tree_display_area, #cm_display_area, #cv_display_area, .detail_chart_container {
+#channel_tree_display_area, #cm_display_area, #cv_display_area, .microwave_div, .detail_chart_container {
   outline: #777 1px solid;
 }
