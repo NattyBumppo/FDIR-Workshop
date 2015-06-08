@@ -17,6 +17,7 @@ valid_channels = None
 batch_size = 720
 pre_frame_size = 180 # This is the amount before the 'time' to look for correlation
 post_frame_size = 180 # This is the time after, thus a size of pre + post + 1
+time_step = 17 # Setting this explicitly for now...
 
 @app.route('/')
 def display_main():
@@ -25,7 +26,6 @@ def display_main():
 @app.route('/get_faults')
 def get_faults():
     time = request.args.get('time', None)
-    time_step = 17 # Setting this explicitly for now...
 
     if time is None:
         return json_error('time must be specified.')
@@ -37,7 +37,11 @@ def get_faults():
         with open(relative_path('data/' + channel_name + '.json')) as channel_file:
             info = json.load(channel_file)
             time_index = calculate_index(info, time)
-            channel_values[channel_name] = [info['values'][time_index]]
+
+            # Calculate indices for slicing
+            start_index = max(0, time_index - pre_frame_size)
+            slice_index = time_index + post_frame_size # Assumes all will have either enough data, or only the same amount
+            channel_values[channel_name] = info['values'][start_index:slice_index]
 
     alarm_data = fault_detector.get_alarm_data(relative_path('config/alarms.json'))
 
