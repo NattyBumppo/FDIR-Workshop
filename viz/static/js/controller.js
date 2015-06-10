@@ -53,7 +53,7 @@
   function setupGraphs() {
     graph_drawer.bind('#detail_graphs');
 
-    timer.registerUpdater(graph_drawer.updateGraphs, 100);
+    timer.registerUpdater(graph_drawer.updateGraphs, 150);
   }
 
   function setupCorrelationVector() {
@@ -66,7 +66,7 @@
     correlation_matrix.bind('#correlation_matrix');
     correlation_matrix.setSize(400, 400);
 
-    timer.registerUpdater(correlation_matrix.display, 100);
+    timer.registerUpdater(correlation_matrix.display, 500);
   }
 
   function setupMicrowave() {
