@@ -39,6 +39,6 @@ As development continued, they iterated on design decisions and improved the ove
 The major tasks within this project were distributed as follows:
 
 * **Nathaniel**: Data simulation, fault detection system, monitoring panel, correlation backend, metafile format design and parsing, server-client communication
-* **Nick**: channel hierarchy window, correlation matrix frontend, channel correlation vector frontend, plot, server-client communication
+* **Nick**: channel hierarchy window, correlation matrix frontend, channel correlation vector frontend, plots, server-client communication
 
 (However, there was quite a bit of crossover as well as pair-programming.)
