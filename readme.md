@@ -1,6 +1,13 @@
 # Summary
 
-This is a networked JavaScript application (and accompanying Arduino application for real data, and Python data simulator for synthesized data) that allows the visualization, within a 2D/3D interface, of data sent from another device.
+Determining the root causes of problems for complex electromechanical systems is difficult. Systems can detect fault states quite reliably using simulated software models; however, even when a fault is detected, it can be difficult to determine the underlying reasons, and resolution method, for that fault. Some anticipated faults may be automatically recovered from, but others are more complex and require humans to understand their root causes before resolving them.
+
+In this paper, we discuss the work that we’ve done to address these
+issues within a data visualization product. We discuss the major
+frontend components, as well as our highly modularized backend, which we
+developed in order to make a system that not only simplifies the
+telemetry monitoring and fault diagnosis tasks, but does it in a way
+that’s extensible to a wide variety of systems.
 
 # Development Notes
 
@@ -14,11 +21,11 @@ The server is [flask](http://flask.pocoo.org/), which can be installed minimally
 
 To run the visualization server/client combo, in the root directory either run:
 
-    flask -a viz --debug run # Requires Flask 1.0, I believe (?)
+    flask -a viz --debug run # Requires Flask 1.0
 
 or:
 
-    python viz.py # Using python -m viz might be preferable, if we can get that working with flask
+    python viz.py
 
 This will start a [localhost server](http://localhost:5000) on port 5000.
 
