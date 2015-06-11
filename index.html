@@ -45,11 +45,6 @@
   The <a href="paper-natguy-nreiter.pdf">full paper</a> includes more details.
 </p>
 
-        <h1>
-<a id="summary" class="anchor" href="#summary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h1>
-
-<p>This is a networked JavaScript application (and accompanying Arduino application for real data, and Python data simulator for synthesized data) that allows the visualization, within a 2D/3D interface, of data sent from another device.</p>
-
 <img src="images/summary.png" alt="Screenshot of the application" />
 
 <h1>
@@ -84,12 +79,12 @@
 
 <p>To run the visualization server/client combo, in the root directory either run:</p>
 
-<pre><code>flask -a viz --debug run # Requires Flask 1.0, I believe (?)
+<pre><code>flask -a viz --debug run # Requires Flask 1.0
 </code></pre>
 
 <p>or:</p>
 
-<pre><code>python viz.py # Using python -m viz might be preferable, if we can get that working with flask
+<pre><code>python viz.py
 </code></pre>
 
 <p>This will start a <a href="http://localhost:5000">localhost server</a> on port 5000.</p>
