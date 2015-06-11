@@ -1,0 +1,149 @@
+{ "children":
+    [{
+        "category": "Electrical System",
+        "children":
+
+        [{
+            "category": "Left Motor",
+            "children":
+            [ 
+                {
+                    "display_name": "Left motor current draw",
+                    "type": "float",
+                    "units": "A",
+                    "mean": 5.0,
+                    "stddev": 1.0
+                },
+                {
+                    "display_name": "Left motor voltage",
+                    "type": "float",
+                    "units": "V",
+                    "mean": 7.0,
+                    "stddev": 0.5
+                }
+            ]
+
+        },
+        {
+            "category": "Right Motor",
+            "children":
+            [ 
+                {
+                    "display_name": "Right motor current draw",
+                    "type": "float",
+                    "units": "A",
+                    "mean": 5.0,
+                    "stddev": 1.0
+                },
+                {
+                    "display_name": "Right motor voltage",
+                    "type": "float",
+                    "units": "V",
+                    "mean": 7.0,
+                    "stddev": 0.5
+                }
+            ]
+
+        }]
+    },
+    {
+        "category": "Main CPU",
+        "children":
+
+        [
+            {
+                "display_name": "Cores in use",
+                "type": "int",
+                "mean": 4,
+                "stddev": 0.4
+            },
+            {
+                "display_name": "Total CPU usage",
+                "type": "float",
+                "units": "%",
+                "mean": 50.0,
+                "stddev": 5.0
+            },
+            {
+                "display_name": "Total used RAM",
+                "type": "float",
+                "units": "MB",
+                "mean": 500.0,
+                "stddev": 10.0
+            },
+            {
+                "display_name": "Current FSM state",
+                "type": "string",
+                "mean": "Running"
+            },
+                                            {
+                "display_name": "Internal health metric",
+                "type": "float",
+                "units": "",
+                "mean": 80.0,
+                "stddev": 8
+            }
+        ]
+    },
+    {
+        "category": "Inertial Sensors",
+        "children":
+
+        [{
+            "category": "Gyroscope",
+            "children":
+            [ 
+                {
+                    "display_name": "X rotation",
+                    "type": "float",
+                    "units": "degrees",
+                    "mean": 0,
+                    "stddev": 0.3
+                },
+                {
+                    "display_name": "Y rotation",
+                    "type": "float",
+                    "units": "degrees",
+                    "mean": 0,
+                    "stddev": 0.3
+                },
+                {
+                    "display_name": "Z rotation",
+                    "type": "float",
+                    "units": "degrees",
+                    "mean": 0,
+                    "stddev": 0.3
+                }                
+            ]
+
+        },
+        {
+            "category": "Accelerometer",
+            "children":
+            [ 
+                {
+                    "display_name": "X acceleration",
+                    "type": "float",
+                    "units": "g",
+                    "mean": 0,
+                    "stddev": 0.2
+                },
+                {
+                    "display_name": "Y acceleration",
+                    "type": "float",
+                    "units": "g",
+                    "mean": 0,
+                    "stddev": 0.2
+                },
+                {
+                    "display_name": "Z acceleration",
+                    "type": "float",
+                    "units": "g",
+                    "mean": 0,
+                    "stddev": 0.2
+                }                
+            ]
+
+        }]
+    }]
+}

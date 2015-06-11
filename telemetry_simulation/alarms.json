@@ -1,0 +1,28 @@
+{
+    "alarms": [
+        {
+            "name": "High motor voltage",
+            "triggers": [
+            {
+                "left_operand_channel": "Left motor voltage",
+                "comparison_operator": ">",
+                "right_operand_literal": 10.0
+            },
+            {
+                "left_operand_channel": "Right motor voltage",
+                "comparison_operator": ">",
+                "right_operand_literal": 10.0
+            }]
+        },
+        {
+            "name": "Overacceleration",
+            "triggers": [
+            {
+                "left_operand_channel_list": ["X acceleration", "Y acceleration", "Z acceleration"],
+                "left_operand_modifier": "Average",
+                "comparison_operator": ">",
+                "right_operand_literal": 5.0
+            }]
+        }
+    ]
+}

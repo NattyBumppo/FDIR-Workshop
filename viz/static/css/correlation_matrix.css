@@ -1,0 +1,15 @@
+.cm-background {
+  fill: #EEE;
+}
+
+#correlation_matrix line {
+  stroke: #FFF;
+}
+
+#correlation_matrix text.active {
+  fill: #F00;
+}
+
+#correlation_matrix text {
+  font-size: 10px;
+}

@@ -1,0 +1,65 @@
+h2 {
+  font-size: 20px;
+  padding: 5px;
+  margin: 0px;
+}
+
+body {
+  background: #EEE;
+  padding-bottom: 10px;
+}
+
+#cv_channel_title {
+  font-size: 16px;
+}
+
+#detail_graph_display_area div.detail_chart_container {
+  position: relative;
+  background: #FFF;
+  margin: 1px;
+  margin-top: 5px;
+}
+
+.detail_chart_container:nth-child(odd) {
+  float: left;
+}
+
+.detail_chart_container:nth-child(even) {
+  float: right;
+}
+
+.chart_close_button {
+  position: absolute;
+  top: 0px;
+  right: 2px;
+  z-index: 200;
+}
+
+.chart_close_button:link, .chart_close_button:visited {
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.chart_close_button:hover, .chart_close_button:active {
+  text-decoration: none;
+  background: rgba(255, 255, 255, 1.0);
+  cursor: pointer;
+}
+
+.c3-legend-item-tile {
+  display: none;
+}
+
+#correlation_vector p {
+  padding: 10px;
+}
+
+#specific_display_area #detail_graph_display_area .help_message_container {
+  margin: 1px;
+  background: #FFF;
+  margin-top: 5px;
+}
+
+#specific_display_area #detail_graph_display_area .help_message {
+  padding: 10px;
+}

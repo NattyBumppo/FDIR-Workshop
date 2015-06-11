@@ -1,0 +1,62 @@
+#display_area {
+  width: 1220px;
+  margin: 0px;
+  padding: 0px;
+}
+
+#display_area div {
+  margin: 0px;
+  padding: 0px;
+}
+
+#overview_display_area {
+  width: 820px;
+  float: left;
+}
+
+#overview_display_area #channel_tree_display_area {
+  width: 810px;
+  height: 400px;
+  background: #FFF;
+  margin-bottom: 10px;
+}
+
+#correlation_display_area {
+  width: 810px;
+}
+
+#correlation_display_area #cm_display_area {
+  width: 400px;
+  float: left;
+  overflow-x: hidden;
+  background: #FFF;
+  margin-right: 10px;
+}
+
+#cv_display_area {
+  width: 400px;
+  overflow-x: hidden;
+  background: #FFF;
+}
+
+#display_area #specific_display_area #mw_display_area {
+  width: 400px;
+  background: #FFF;
+  float: left;
+  margin-bottom: 5px;
+}
+
+#display_area #specific_display_area #detail_graph_display_area {
+  width: 400px;
+  overflow-x: hidden;
+  padding-bottom: 10px;
+}
+
+.detail_chart_container {
+  width: 196px;
+  height: 165px;
+}
+
+#channel_tree_display_area, #cm_display_area, #cv_display_area, .microwave_div, .detail_chart_container, .help_message_container {
+  outline: #777 1px solid;
+}

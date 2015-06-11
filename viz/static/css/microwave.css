@@ -1,0 +1,225 @@
+.microwave {
+    position: relative;
+    width: 400px;
+    height: 500px;
+    margin: 30px auto 0 auto;
+    padding: 3%;
+}
+
+.microwave h1{
+    text-align: center;
+    text-transform: uppercase;
+    margin: 30px;
+    padding: 0;
+    color: #000;
+}
+
+.content {
+    position: relative;
+    width: 70%;
+    margin: 3px auto 0 auto;
+    min-width: 300px;
+
+}
+
+.content ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 5px solid #555;
+    background: #FFF;
+}
+.content ul li{
+    position: relative;
+    color: #000;
+    font-family: helvetica;
+    padding: 2% 5%;
+    border-bottom: 1px solid #555;
+}
+
+.content ul li:last-child {
+    border-bottom: none;
+}
+
+.name{
+    font-weight: bold;
+}
+.count{
+    display: inline-block;
+    float: right;
+    color: #000;
+    font-weight: bold;
+}
+
+.content ul{
+    border-radius: 20px;
+}
+
+.microwave_title {
+    color: #000;
+    padding: 5px;
+}
+
+.microwave_div div#pause_and_time_area {
+  position: relative;
+  overflow: auto;
+  height: 40px;
+  margin: 10px;
+  margin-bottom: 0px;
+}
+
+.pause_area {
+  position: absolute;
+  top: 0px;
+  left: 100px;
+}
+
+.pause_control {
+    -moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
+    box-shadow: inset 0px 1px 0px 0px #ffffff;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
+    background: -moz-linear-gradient(top, #ffffff 5%, #e9e9e9 100%);
+    background: -webkit-linear-gradient(top, #ffffff 5%, #e9e9e9 100%);
+    background: -o-linear-gradient(top, #ffffff 5%, #e9e9e9 100%);
+    background: -ms-linear-gradient(top, #ffffff 5%, #e9e9e9 100%);
+    background: linear-gradient(to bottom, #ffffff 5%, #e9e9e9 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0);
+    background-color: #FFFFFF;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    color: #666666;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 16px 8px 16px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #ffffff;
+    height: 26px;
+    vertical-align: middle;
+    line-height: 100%;
+}
+
+.pause_control:hover {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9));
+    background: -moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#f9f9f9',GradientType=0);
+    background-color: #e9e9e9;
+}
+
+.pause_control:active {
+    position:relative;
+    top:1px;
+}
+
+.microwave_div {
+    background-color: #FFF;
+    padding: 20px;
+    width: 400px;
+    min-height: 330px;
+    max-height: 330px;
+    color: #000;
+    line-height: 30px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0px 28px;
+    position: relative;
+}
+
+#specific_display_area .microwave_div div.left_fault_info {
+    clear: both;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+    width: 60%;
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+    height: 240px;
+    padding: 0px 10px;
+    overflow: scroll;
+    line-height: normal;
+}
+
+.mw_label {
+  font-weight: bold;
+}
+
+.middle_channel_readings{
+    width: 20%;
+    text-align: center;
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: middle;
+    float: left;
+    font-size: 10px;
+}
+
+.right_channel_readings{
+    width: 19%;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 12px;
+    float: left;
+    font-size: 10px;
+}
+
+.channel_name_display {
+    clear: both;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.time_area {
+    width: 45%;
+    font-weight: bold;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    text-align: right;
+}
+
+#time_display {
+    display: inline-block;
+}
+
+input[type=text] {
+    vertical-align: middle;
+    line-height: 100%;
+    width: 80%;
+    text-align: center;
+}
+
+#status_icon {
+  position: absolute;
+  top: 0px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+}
+
+#status_icon img {
+  width: 40px;
+  height: 40px;
+}
+
+#fault_info_label {
+  font-size: 15px;
+}
+
+#specific_display_area .microwave_div .fault_info_section {
+  padding-bottom: 1px;
+}
+
+#specific_display_area .microwave_div .fault_note_section {
+  padding-bottom: 8px;
+}

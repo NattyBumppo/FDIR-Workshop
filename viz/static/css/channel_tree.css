@@ -1,0 +1,20 @@
+.node circle {
+  cursor: pointer;
+  fill: #FFF;
+  stroke: #4CB446;
+  stroke-width: 1.5px;
+}
+
+.node circle.faulted {
+  stroke: #B44651;
+}
+
+.node text {
+  font-size: 11px;
+}
+
+path.link {
+  fill: none;
+  stroke: #CCC;
+  stroke-width: 1.5px;
+}

@@ -1,0 +1,16 @@
+#correlation_vector .correlation_marker {
+  width: 20px;
+  height: 20px;
+  margin: 10px;
+  float: left;
+}
+
+.correlation_label {
+  height: 40px;
+  line-height: 40px;
+  vertical-align: middle;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
