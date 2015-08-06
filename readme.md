@@ -2,8 +2,8 @@
 
 Determining the root causes of problems for complex electromechanical systems is difficult. Systems can detect fault states quite reliably using simulated software models; however, even when a fault is detected, it can be difficult to determine the underlying reasons, and resolution method, for that fault. Some anticipated faults may be automatically recovered from, but others are more complex and require humans to understand their root causes before resolving them.
 
-In this paper, we discuss the work that we’ve done to address these
-issues within a data visualization product. We discuss the major
+In this project, we've worked to address these
+issues within a data visualization product. We focused on the major
 frontend components, as well as our highly modularized backend, which we
 developed in order to make a system that not only simplifies the
 telemetry monitoring and fault diagnosis tasks, but does it in a way
